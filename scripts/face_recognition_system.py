@@ -12,10 +12,16 @@ from mysql.connector import pooling
 from PIL import Image, ImageDraw, ImageFont
 from facenet_pytorch import MTCNN, InceptionResnetV1
 from sklearn.metrics.pairwise import cosine_similarity
-
+import os
+from dotenv import load_dotenv
 
 class FaceRecognitionSystem:
     def __init__(self):
+        load_dotenv("../.env")
+        self.db_name = os.getenv("DB_DATABASE")
+        self.db_username = os.getenv("DB_USERNAME")
+        self.db_password = os.getenv("DB_PASSWORD")
+
         self.parse_arguments()
         self.setup_database()
         self.initialize_models()
@@ -49,9 +55,9 @@ class FaceRecognitionSystem:
     def setup_database(self):
         dbconfig = {
             "host": "localhost",
-            "user": "root",
-            "password": "",
-            "database": "frstudent_management",
+            "user": self.db_username,
+            "password": self.db_password,
+            "database": self.db_name,
         }
         self.pool = pooling.MySQLConnectionPool(
             pool_name="student_management_pool",
