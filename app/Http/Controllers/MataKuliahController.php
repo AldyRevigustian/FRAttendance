@@ -21,6 +21,7 @@ class MataKuliahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'kode' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
         ]);
 
@@ -38,10 +39,11 @@ class MataKuliahController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'kode' => 'required|string|max:255',
             'nama' => 'required|string|max:255',
         ]);
 
-        $matakuliah = MataKuliah::findOrFail($id)->update($request->all());
+        MataKuliah::findOrFail($id)->update($request->all());
         return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah berhasil diperbarui.');
     }
 

@@ -24,6 +24,7 @@
                         <thead>
                             <tr>
                                 <th class="w-2">ID</th>
+                                <th>Kode Matakuliah</th>
                                 <th>Nama Matakuliah</th>
                                 <th class="w-1/6">Aksi</th>
                             </tr>
@@ -32,6 +33,7 @@
                             @foreach ($matakuliah as $matkul)
                                 <tr>
                                     <td>{{ $matkul->id }}</td>
+                                    <td>{{ $matkul->kode }}</td>
                                     <td>{{ $matkul->nama }}</td>
                                     <td class="flex space-x-2">
                                         <a href="{{ route('matakuliah.edit', $matkul->id) }}"
