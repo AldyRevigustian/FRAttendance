@@ -13,8 +13,7 @@ print(f"Using device: {device}")
 
 mtcnn = MTCNN(keep_all=True, device=device)
 inception_resnet = InceptionResnetV1(pretrained="vggface2").eval().to(device)
-dataset_path = "D:/Project/StudentManagement/scripts/Images/Augmented_Images/"
-
+dataset_path = os.path.abspath("../scripts/Images/Augmented_Images/")
 
 class FaceDataset(Dataset):
     def __init__(self, root_dir, transform=None):
@@ -75,7 +74,10 @@ for faces, label in dataloader:
             embeddings = inception_resnet(faces)
             face_embeddings.append(embeddings.detach().cpu().numpy())
             known_face_embeddings.append(
-                inception_resnet(faces[0].unsqueeze(0).to(device)).detach().cpu().numpy()
+                inception_resnet(faces[0].unsqueeze(0).to(device))
+                .detach()
+                .cpu()
+                .numpy()
             )
             labels.append(label.cpu().numpy())
         except Exception as e:
@@ -97,13 +99,13 @@ else:
     svm_model.fit(face_embeddings, labels)
 
     np.save(
-        "D:/Project/StudentManagement/scripts/Model/label_encoder_classes.npy",
+        os.path.abspath("../scripts/Model/label_encoder_classes.npy"),
         dataset.label_encoder.classes_,
     )
     np.save(
-        "D:/Project/StudentManagement/scripts/Model/known_face_embeddings.npy",
+        os.path.abspath("../scripts/Model/known_face_embeddings.npy"),
         known_face_embeddings,
     )
-    joblib.dump(svm_model, "D:/Project/StudentManagement/scripts/Model/svm_model.pkl")
+    joblib.dump(svm_model, os.path.abspath("../scripts/Model/svm_model.pkl"))
 
     print("Model telah dilatih dan disimpan.")

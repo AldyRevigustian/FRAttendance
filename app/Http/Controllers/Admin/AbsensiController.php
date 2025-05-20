@@ -27,29 +27,38 @@ class AbsensiController extends Controller
 
     public function store(Request $request)
     {
+        $env_path = realpath(__DIR__ . '../../../../../.env');
+        $env_path = str_replace('\\', '/', $env_path);
+
+        $project_path = realpath(__DIR__ . '../../../../../scripts');
+        $project_path = str_replace('\\', '/', $project_path);
+
+        $python_path = trim(shell_exec('where python'));
+        $python_path = str_replace('\\', '/', $python_path);
+
         $class_id = $request->kelas_id;
         $class_name = Kelas::findOrFail($class_id)->nama;
         $course_id = $request->matakuliah_id;
         $course_name = MataKuliah::findOrFail($course_id)->nama;
 
-        $pythonPath = 'C:/Users/Asus/AppData/Local/Programs/Python/Python310/python.exe';
-        $scriptPath = 'D:/FRStudentManagement-Laravel/scripts/main.py';
+        $script_path = $project_path . '/main.py';
 
         $command = [
             'C:/Program Files/Git/bin/bash.exe',
             '-c',
             sprintf(
-                '%s %s --selected_class_id %d --selected_class_name "%s" --selected_course_id %d --selected_course_name "%s" &',
-                $pythonPath,
-                $scriptPath,
+                '%s %s --selected_class_id %d --selected_class_name "%s" --selected_course_id %d --selected_course_name "%s" --project_path "%s" --env_path "%s" &',
+                $python_path,
+                $script_path,
                 $class_id,
                 $class_name,
                 $course_id,
-                $course_name
+                $course_name,
+                $project_path,
+                $env_path
             )
         ];
 
-        // dd($command);
         $process = new Process($command);
         try {
             $process->mustRun();

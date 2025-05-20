@@ -17,12 +17,13 @@ from dotenv import load_dotenv
 
 class FaceRecognitionSystem:
     def __init__(self):
-        load_dotenv("../.env")
+        self.parse_arguments()
+
+        load_dotenv(self.env_path)
         self.db_name = os.getenv("DB_DATABASE")
         self.db_username = os.getenv("DB_USERNAME")
         self.db_password = os.getenv("DB_PASSWORD")
 
-        self.parse_arguments()
         self.setup_database()
         self.initialize_models()
         self.setup_camera()
@@ -45,12 +46,20 @@ class FaceRecognitionSystem:
         parser.add_argument(
             "--selected_course_name", type=str, help="Nama mata kuliah yang dipilih"
         )
+        parser.add_argument(
+            "--project_path", type=str, help="Project Path"
+        )
+        parser.add_argument(
+            "--env_path", type=str, help="Env Path"
+        )
         args = parser.parse_args()
 
         self.selected_class_id = args.selected_class_id
         self.selected_class_name = args.selected_class_name
         self.selected_course_id = args.selected_course_id
         self.selected_course_name = args.selected_course_name
+        self.project_path = args.project_path
+        self.env_path = args.env_path
 
     def setup_database(self):
         dbconfig = {
@@ -78,13 +87,13 @@ class FaceRecognitionSystem:
             InceptionResnetV1(pretrained="vggface2").eval().to(self.device)
         )
         self.svm_model = joblib.load(
-            "D:/Project/StudentManagement/scripts/Model/svm_model.pkl"
+            f"{self.project_path}/Model/svm_model.pkl"
         )
         self.label_encoder_classes = np.load(
-            "D:/Project/StudentManagement/scripts/Model/label_encoder_classes.npy"
+            f"{self.project_path}/Model/label_encoder_classes.npy"
         )
         self.known_embeddings = np.load(
-            "D:/Project/StudentManagement/scripts/Model/known_face_embeddings.npy"
+            f"{self.project_path}/Model/known_face_embeddings.npy"
         )
         self.mtcnn = MTCNN(
             keep_all=True,
@@ -105,10 +114,10 @@ class FaceRecognitionSystem:
         cv2.resizeWindow("Face Recognition", 1920, 1080)
 
     def load_resources(self):
-        self.folderModePath = "D:/Project/StudentManagement/scripts/Resources/Modes"
+        self.folderModePath = f"{self.project_path}/Resources/Modes"
         self.modePathList = os.listdir(self.folderModePath)
         self.imgBackground = cv2.imread(
-            "D:/Project/StudentManagement/scripts/Resources/background.png"
+            f"{self.project_path}/Resources/background.png"
         )
         self.imgModeList = [
             cv2.imread(os.path.join(self.folderModePath, path))
@@ -188,8 +197,11 @@ class FaceRecognitionSystem:
         position,
         font_size,
         text_color=(255, 255, 255),
-        font_path="D:/Project/StudentManagement/scripts/Font/SFMedium.OTF",
+        font_path=None,
     ):
+        if font_path is None:
+            font_path = f"{self.project_path}/Font/SFMedium.OTF"
+
         pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
         draw = ImageDraw.Draw(pil_image)
 
@@ -316,7 +328,7 @@ class FaceRecognitionSystem:
             (20, 35),
             35,
             (65, 65, 65),
-            "D:/Project/StudentManagement/scripts/Font/SFBold.OTF",
+            f"{self.project_path}/Font/SFBold.OTF",
         )
 
         frame_with_background = self.update_display(frame_with_background)
@@ -359,7 +371,7 @@ class FaceRecognitionSystem:
                             print(studentInfo)
 
                             if studentInfo[6] == self.selected_class_name:
-                                imgPath = f"D:/Project/StudentManagement/scripts/Images/{predicted_name}/profile.jpg"
+                                imgPath = f"{self.project_path}/Images/{predicted_name}/profile.jpg"
                                 if not os.path.exists(imgPath):
                                     print(
                                         f"Error: No such file '{imgPath}' in local storage."

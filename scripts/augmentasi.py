@@ -23,9 +23,8 @@ seq = iaa.Sequential(
     ]
 )
 
-dataset_dir = "D:/Project/StudentManagement/scripts/Images"
-output_dir = "D:/Project/StudentManagement/scripts/Images/Augmented_Images/"
-
+dataset_dir = os.path.abspath("../scripts/Images")
+output_dir = os.path.abspath("../scripts/Images/Augmented_Images/")
 
 def detect_and_crop_face(image_path):
     img = Image.open(image_path)
