@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
@@ -37,13 +38,13 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswas = Mahasiswa::with('kelas')->get();
-        return view('mahasiswa.index', compact('mahasiswas'));
+        return view('admin.mahasiswa.index', compact('mahasiswas'));
     }
 
     public function create()
     {
         $kelas = Kelas::all();
-        return view('mahasiswa.create', compact('kelas'));
+        return view('admin.mahasiswa.create', compact('kelas'));
     }
 
     public function store(Request $request)
@@ -73,15 +74,15 @@ class MahasiswaController extends Controller
         }
 
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan');
+        return redirect()->route('admin.mahasiswa')->with('success', 'Mahasiswa berhasil ditambahkan');
     }
 
-    public function show($id)
+    public function edit($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
         $kelas = Kelas::all();
 
-        return view('mahasiswa.view', compact('mahasiswa', 'kelas'));
+        return view('admin.mahasiswa.edit', compact('mahasiswa', 'kelas'));
     }
 
     public function destroy($id)
@@ -100,6 +101,6 @@ class MahasiswaController extends Controller
         }
         $mahasiswa->delete();
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus');
+        return redirect()->route('admin.mahasiswa')->with('success', 'Mahasiswa berhasil dihapus');
     }
 }

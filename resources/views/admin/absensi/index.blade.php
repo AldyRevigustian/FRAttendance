@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Daftar Matakuliah') }}
+            {{ __('Daftar Absensi') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('matakuliah.create') }}"
+                    <a href="{{ route('admin.absensi_create') }}"
                         class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
-                        Tambah Matakuliah
+                        Hidupkan Mesin
                     </a>
 
                     @if (session('success'))
@@ -20,28 +20,28 @@
                         </div>
                     @endif
 
-                    <table id="kelasTable" class="stripe w-full">
+                    <!-- Absensi Table -->
+                    <table id="absensiTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">ID</th>
-                                <th>Kode Matakuliah</th>
-                                <th>Nama Matakuliah</th>
-                                <th class="w-1/6">Aksi</th>
+                                <th class="w-2">ID Mahasiswa</th>
+                                <th>Nama Mahasiswa</th>
+                                <th class="w-1/12">Kelas</th>
+                                <th class="w-1/5">Mata Kuliah</th>
+                                <th class="w-1/6">Tanggal</th>
+                                <th class="w-1/12">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($matakuliah as $matkul)
+                            @foreach ($absensis as $absensi)
                                 <tr>
-                                    <td>{{ $matkul->id }}</td>
-                                    <td>{{ $matkul->kode }}</td>
-                                    <td>{{ $matkul->nama }}</td>
+                                    <td>{{ $absensi->mahasiswa->id }}</td>
+                                    <td>{{ $absensi->mahasiswa->nama }}</td>
+                                    <td>{{ $absensi->kelas->nama }}</td>
+                                    <td>{{ $absensi->mataKuliah->nama }}</td>
+                                    <td>{{ $absensi->tanggal }}</td>
                                     <td class="flex space-x-2">
-                                        <a href="{{ route('matakuliah.edit', $matkul->id) }}"
-                                            class="inline-flex items-center px-3 py-1.5 bg-yellow-600 text-white text-xs font-semibold rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
-                                            Edit
-                                        </a>
-
-                                        <form action="{{ route('matakuliah.destroy', $matkul->id) }}" method="POST"
+                                        <form action="{{ route('admin.absensi_destroy', $absensi->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -63,7 +63,7 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#kelasTable').DataTable({
+                $('#absensiTable').DataTable({
                     "processing": true,
                     "serverSide": false,
                     "paging": true,

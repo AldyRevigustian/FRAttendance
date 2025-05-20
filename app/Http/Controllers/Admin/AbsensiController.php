@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Absensi;
 use App\Models\Kelas;
 use App\Models\MataKuliah;
@@ -14,14 +15,14 @@ class AbsensiController extends Controller
     public function index()
     {
         $absensis = Absensi::with(['mahasiswa', 'kelas', 'mataKuliah'])->get();
-        return view('absensi.index', compact('absensis'));
+        return view('admin.absensi.index', compact('absensis'));
     }
 
     public function create()
     {
         $kelas = Kelas::all();
         $matakuliah = MataKuliah::all();
-        return view('absensi.create', compact('kelas', 'matakuliah'));
+        return view('admin.absensi.create', compact('kelas', 'matakuliah'));
     }
 
     public function store(Request $request)
@@ -32,7 +33,7 @@ class AbsensiController extends Controller
         $course_name = MataKuliah::findOrFail($course_id)->nama;
 
         $pythonPath = 'C:/Users/Asus/AppData/Local/Programs/Python/Python310/python.exe';
-        $scriptPath = 'D:/Project/StudentManagement/scripts/main.py';
+        $scriptPath = 'D:/FRStudentManagement-Laravel/scripts/main.py';
 
         $command = [
             'C:/Program Files/Git/bin/bash.exe',
@@ -48,13 +49,13 @@ class AbsensiController extends Controller
             )
         ];
 
+        // dd($command);
         $process = new Process($command);
-
         try {
             $process->mustRun();
-            return redirect()->route('absensi.index')->with('success', 'Mesin Absensi Berhasil Berjalan ');
+            return redirect()->route('admin.absensi')->with('success', 'Mesin Absensi Berhasil Berjalan ');
         } catch (ProcessFailedException $exception) {
-            return redirect()->route('absensi.index')->with('error', 'Mesin Absensi Gagal Berjalan ');
+            return redirect()->route('admin.absensi')->with('error', 'Mesin Absensi Gagal Berjalan ');
         }
     }
 
@@ -63,6 +64,6 @@ class AbsensiController extends Controller
         $absensi = Absensi::findOrFail($id);
         $absensi->delete();
 
-        return redirect()->route('absensi.index')->with('success', 'Absensi berhasil dihapus');
+        return redirect()->route('admin.absensi')->with('success', 'Absensi berhasil dihapus');
     }
 }

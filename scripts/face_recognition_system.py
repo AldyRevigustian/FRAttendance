@@ -51,7 +51,7 @@ class FaceRecognitionSystem:
             "host": "localhost",
             "user": "root",
             "password": "",
-            "database": "student_management",
+            "database": "frstudent_management",
         }
         self.pool = pooling.MySQLConnectionPool(
             pool_name="student_management_pool",

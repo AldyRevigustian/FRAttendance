@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 
 class TrainingController extends Controller
@@ -8,7 +10,7 @@ class TrainingController extends Controller
     public function index()
     {
         $mahasiswas = Mahasiswa::with('kelas')->get();
-        return view('training.index', compact('mahasiswas'));
+        return view('admin.training.index', compact('mahasiswas'));
     }
 
     public function store()
@@ -24,9 +26,9 @@ class TrainingController extends Controller
 
         if ($status1 === 0 && $status2 === 0) {
             Mahasiswa::query()->update(['is_trained' => 1]);
-            return redirect()->route('training.index')->with('success', 'Training Mahasiswa berhasil ');
+            return redirect()->route('admin.training')->with('success', 'Training Mahasiswa berhasil ');
         } else {
-            return redirect()->route('training.index')->with('error', 'Terjadi kesalahan saat Training');
+            return redirect()->route('admin.training')->with('error', 'Terjadi kesalahan saat Training');
         }
     }
 }

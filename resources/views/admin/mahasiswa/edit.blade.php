@@ -34,7 +34,7 @@
 
                     <div id="photo-container" class="grid grid-cols-5 gap-2 mt-4"></div>
 
-                    <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST"
+                    <form action="{{ route('admin.mahasiswa_destroy', $mahasiswa->id) }}" method="POST"
                         style="display:inline;">
                         @csrf
                         @method('DELETE')

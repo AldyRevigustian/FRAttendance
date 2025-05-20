@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('mahasiswa.store') }}" method="POST">
+                    <form action="{{ route('admin.mahasiswa_store') }}" method="POST">
                         @csrf
 
                         <div class="mb-6">
@@ -142,7 +142,7 @@
             verifyButton.textContent = "Memverifikasi...";
 
             try {
-                const response = await fetch('{{ route('mahasiswa.verify') }}', {
+                const response = await fetch('{{ route('admin.mahasiswa_verify') }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

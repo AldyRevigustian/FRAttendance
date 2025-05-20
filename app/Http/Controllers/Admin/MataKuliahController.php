@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,12 @@ class MataKuliahController extends Controller
     public function index()
     {
         $matakuliah = MataKuliah::all();
-        return view('matakuliah.index', compact('matakuliah'));
+        return view('admin.matakuliah.index', compact('matakuliah'));
     }
 
     public function create()
     {
-        return view('matakuliah.create');
+        return view('admin.matakuliah.create');
     }
 
     public function store(Request $request)
@@ -27,13 +28,13 @@ class MataKuliahController extends Controller
 
         MataKuliah::create($request->all());
 
-        return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah berhasil ditambahkan.');
+        return redirect()->route('admin.matakuliah')->with('success', 'Mata kuliah berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $matakuliah = MataKuliah::findOrFail($id);
-        return view('matakuliah.edit', compact('matakuliah'));
+        return view('admin.matakuliah.edit', compact('matakuliah'));
     }
 
     public function update(Request $request, $id)
@@ -44,12 +45,12 @@ class MataKuliahController extends Controller
         ]);
 
         MataKuliah::findOrFail($id)->update($request->all());
-        return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah berhasil diperbarui.');
+        return redirect()->route('admin.matakuliah')->with('success', 'Mata kuliah berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $matakuliah = MataKuliah::findOrFail($id)->delete();
-        return redirect()->route('matakuliah.index')->with('success', 'Mata kuliah berhasil dihapus.');
+        return redirect()->route('admin.matakuliah')->with('success', 'Mata kuliah berhasil dihapus.');
     }
 }
