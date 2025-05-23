@@ -58,7 +58,7 @@ class AbsensiController extends Controller
                 $env_path
             )
         ];
-
+        dd($command);
         $process = new Process($command);
         try {
             $process->mustRun();
