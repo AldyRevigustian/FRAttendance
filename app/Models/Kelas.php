@@ -11,8 +11,13 @@ class Kelas extends Model
 
     protected $fillable = [
         'id',
+        'guru_id',
         'nama'
     ];
+
+    public function guru(){
+        return $this->hasOne(Guru::class);
+    }
 
     public function siswas()
     {

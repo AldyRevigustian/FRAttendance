@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Absensi;
 use App\Models\Admin;
-use App\Models\Dosen;
+use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Database\Seeder;
@@ -26,24 +26,22 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("admin"),
         ]);
 
-        Dosen::create([
-            'kode' => 'DS001',
-            'nama' => 'Dosen',
-            'email' => 'dosen@dosen.com',
-            'password' => Hash::make("dosen"),
+        Guru::create([
+            'kode' => 'GR001',
+            'nama' => 'Guru1',
+            'email' => 'guru1@guru.com',
+            'password' => Hash::make("guru"),
         ]);
 
-        Kelas::create(['nama' => 'LA01']);
-        Kelas::create(['nama' => 'LB01']);
-        Kelas::create(['nama' => 'LC01']);
-        Kelas::create(['nama' => 'LD01']);
-        Kelas::create(['nama' => 'LE01']);
-        Kelas::create(['nama' => 'LF01']);
-        Kelas::create(['nama' => 'LG01']);
-        Kelas::create(['nama' => 'LH01']);
-        Kelas::create(['nama' => 'LI01']);
-        Kelas::create(['nama' => 'LJ01']);
-        Kelas::create(['nama' => 'LK01']);
+        Guru::create([
+            'kode' => 'GR002',
+            'nama' => 'Guru2',
+            'email' => 'guru2@guru.com',
+            'password' => Hash::make("guru"),
+        ]);
+
+        Kelas::create(['nama' => '11-A', 'guru_id' => 1]);
+        Kelas::create(['nama' => '11-B', 'guru_id' => 2]);
 
         Siswa::create([
             'id' => 2702303633,

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Dosen;
+use App\Models\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class DosenAuthController extends Controller
+class GuruAuthController extends Controller
 {
     public function login(Request $request)
     {
@@ -17,23 +17,23 @@ class DosenAuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (!Auth::guard('dosen')->attempt($request->only('email', 'password'))) {
+        if (!Auth::guard('guru')->attempt($request->only('email', 'password'))) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials do not match our records.'],
             ]);
         }
 
-        $dosen = Dosen::where('email', $request->email)->first();
+        $guru = Guru::where('email', $request->email)->first();
 
-        if (!$dosen) {
+        if (!$guru) {
             return response()->json(['message' => 'User not found after authentication.'], 401);
         }
 
-        $token = $dosen->createToken('dosen-api-token')->plainTextToken;
+        $token = $guru->createToken('guru-api-token')->plainTextToken;
 
         return response()->json([
             'message' => 'Login successful',
-            'user' => $dosen,
+            'user' => $guru,
             'token' => $token,
             'token_type' => 'Bearer',
         ]);
@@ -50,7 +50,7 @@ class DosenAuthController extends Controller
     public function dashboard(Request $request)
     {
         return response()->json([
-            'message' => 'Welcome to the Dosen Dashboard!',
+            'message' => 'Welcome to the Guru Dashboard!',
             'user' => $request->user(), // The authenticated user instance
         ]);
     }

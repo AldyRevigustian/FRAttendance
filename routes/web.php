@@ -3,7 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\DosenAuthController;
+use App\Http\Controllers\Auth\GuruAuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\Controller;
@@ -17,8 +17,8 @@ Route::get('/', function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('dosen/login', [DosenAuthController::class, 'showLoginForm'])->name('dosen.login');
-    Route::post('dosen/login', [DosenAuthController::class, 'login'])->name('dosen.login.auth');
+    Route::get('guru/login', [GuruAuthController::class, 'showLoginForm'])->name('guru.login');
+    Route::post('guru/login', [GuruAuthController::class, 'login'])->name('guru.login.auth');
 
     Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.login.auth');
@@ -77,14 +77,14 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         ->name('logout');
 });
 
-Route::prefix('dosen')->middleware(['dosen'])->group(function () {
+Route::prefix('guru')->middleware(['guru'])->group(function () {
     Route::get('/dashboard', function () {
         return "HALLo";
         // return view('dashboard');
-    })->name('dosen.dashboard');
+    })->name('guru.dashboard');
 
     Route::get('/', function () {
-        return redirect()->route('dosen.dashboard');
+        return redirect()->route('guru.dashboard');
     });
 });
 

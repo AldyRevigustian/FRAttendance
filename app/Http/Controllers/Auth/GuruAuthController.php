@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DosenAuthController extends Controller
+class GuruAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login_dosen');
+        return view('auth.login_guru');
     }
 
     public function login(Request $request)
@@ -20,9 +20,9 @@ class DosenAuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('dosen')->attempt($credentials)) {
+        if (Auth::guard('guru')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dosen.dashboard');
+            return redirect()->route('guru.dashboard');
         }
 
         return back()->withErrors([
@@ -35,6 +35,6 @@ class DosenAuthController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('dosen.login');
+        return redirect()->route('guru.login');
     }
 }

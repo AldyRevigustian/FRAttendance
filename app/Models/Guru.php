@@ -8,10 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Dosen extends Authenticatable
+class Guru extends Authenticatable
 {
     use HasApiTokens, Notifiable; // Use the trait
-    protected $table = 'dosens';
+    protected $table = 'gurus';
     protected $fillable = [
         'kode',
         'nama',
