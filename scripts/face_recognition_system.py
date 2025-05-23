@@ -144,7 +144,7 @@ class FaceRecognitionSystem:
         try:
             query = """
                 SELECT m.*, k.nama AS kelas_nama
-                FROM `mahasiswas` m
+                FROM `siswas` m
                 JOIN `kelas` k ON m.kelas_id = k.id
                 WHERE m.id LIKE %s;
             """
@@ -153,23 +153,23 @@ class FaceRecognitionSystem:
             if student_info:
                 return student_info
             else:
-                print("Mahasiswa tidak ditemukan.")
+                print("Siswa tidak ditemukan.")
                 return None
         except mysql.connector.Error as err:
             print(f"Terjadi error: {err}")
 
-    def insert_absensi(self, kelas_id, mata_kuliah_id, mahasiswa_id):
+    def insert_absensi(self, kelas_id, mata_kuliah_id, siswa_id):
         try:
             today_date = datetime.today().strftime("%Y-%m-%d")
             query_check = """
                 SELECT * FROM `absensis`
                 WHERE `kelas_id` = %s
                 AND `mata_kuliah_id` = %s
-                AND `mahasiswa_id` = %s
+                AND `siswa_id` = %s
                 AND DATE(`tanggal`) LIKE %s;
             """
             self.cursor.execute(
-                query_check, (kelas_id, mata_kuliah_id, mahasiswa_id, f"%{today_date}%")
+                query_check, (kelas_id, mata_kuliah_id, siswa_id, f"%{today_date}%")
             )
             existing_record = self.cursor.fetchone()
 
@@ -178,10 +178,10 @@ class FaceRecognitionSystem:
                 return False
 
             query_insert = """
-                INSERT INTO `absensis` (`kelas_id`, `mata_kuliah_id`, `mahasiswa_id`)
+                INSERT INTO `absensis` (`kelas_id`, `mata_kuliah_id`, `siswa_id`)
                 VALUES (%s, %s, %s);
             """
-            self.cursor.execute(query_insert, (kelas_id, mata_kuliah_id, mahasiswa_id))
+            self.cursor.execute(query_insert, (kelas_id, mata_kuliah_id, siswa_id))
             self.conn.commit()
             print("Data berhasil ditambahkan.")
             return True

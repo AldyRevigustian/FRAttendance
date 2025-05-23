@@ -24,10 +24,9 @@
                     <table id="absensiTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">ID Mahasiswa</th>
-                                <th>Nama Mahasiswa</th>
+                                <th class="w-2">ID Siswa</th>
+                                <th>Nama Siswa</th>
                                 <th class="w-1/12">Kelas</th>
-                                <th class="w-1/5">Mata Kuliah</th>
                                 <th class="w-1/6">Tanggal</th>
                                 <th class="w-1/12">Aksi</th>
                             </tr>
@@ -35,10 +34,9 @@
                         <tbody>
                             @foreach ($absensis as $absensi)
                                 <tr>
-                                    <td>{{ $absensi->mahasiswa->id }}</td>
-                                    <td>{{ $absensi->mahasiswa->nama }}</td>
+                                    <td>{{ $absensi->siswa->id }}</td>
+                                    <td>{{ $absensi->siswa->nama }}</td>
                                     <td>{{ $absensi->kelas->nama }}</td>
-                                    <td>{{ $absensi->mataKuliah->nama }}</td>
                                     <td>{{ $absensi->tanggal }}</td>
                                     <td class="flex space-x-2">
                                         <form action="{{ route('admin.absensi_destroy', $absensi->id) }}" method="POST"

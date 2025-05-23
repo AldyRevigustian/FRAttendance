@@ -13,7 +13,7 @@
                         @csrf
                         <button type="submit"
                             class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
-                            Train Mahasiswa
+                            Train Siswa
                         </button>
                     </form>
 
@@ -27,23 +27,23 @@
                         </div>
                     @endif
 
-                    <table id="mahasiswaTable" class="stripe w-full">
+                    <table id="siswaTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">NIM</th>
+                                <th class="w-2">NIS</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
                                 <th class="w-1/6">Is Trained</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mahasiswas as $mahasiswa)
+                            @foreach ($siswas as $siswa)
                                 <tr>
-                                    <td>{{ $mahasiswa->id }}</td>
-                                    <td>{{ $mahasiswa->nama }}</td>
-                                    <td>{{ $mahasiswa->kelas->nama }}</td>
+                                    <td>{{ $siswa->id }}</td>
+                                    <td>{{ $siswa->nama }}</td>
+                                    <td>{{ $siswa->kelas->nama }}</td>
                                     <td class="flex space-x-2">
-                                        @if ($mahasiswa->is_trained == 0)
+                                        @if ($siswa->is_trained == 0)
                                             <span
                                                 class="inline-block px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-full">Not
                                                 Trained</span>
@@ -64,7 +64,7 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#mahasiswaTable').DataTable({
+                $('#siswaTable').DataTable({
                     "processing": true,
                     "serverSide": false,
                     "paging": true,

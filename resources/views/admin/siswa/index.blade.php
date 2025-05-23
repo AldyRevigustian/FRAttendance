@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Daftar Matakuliah') }}
+            {{ __('Daftar Siswa') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('admin.matakuliah_create') }}"
+                    <a href="{{ route('admin.siswa_create') }}"
                         class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
-                        Tambah Matakuliah
+                        Tambah Siswa
                     </a>
 
                     @if (session('success'))
@@ -20,28 +20,30 @@
                         </div>
                     @endif
 
-                    <table id="kelasTable" class="stripe w-full">
+                    <table id="siswaTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">No</th>
-                                <th>Kode Matakuliah</th>
-                                <th>Nama Matakuliah</th>
+                                <th class="w-2">No.</th>
+                                <th class="w-3">NIS</th>
+                                <th>Nama</th>
+                                <th>Kelas</th>
                                 <th class="w-1/6">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($matakuliah as $key=>$matkul)
+                            @foreach ($siswas as $key => $siswa)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $matkul->kode }}</td>
-                                    <td>{{ $matkul->nama }}</td>
+                                    <td>{{ $siswa->id }}</td>
+                                    <td>{{ $siswa->nama }}</td>
+                                    <td>{{ $siswa->kelas->nama }}</td>
                                     <td class="flex space-x-2">
-                                        <a href="{{ route('admin.matakuliah_edit', $matkul->id) }}"
-                                            class="inline-flex items-center px-3 py-1.5 bg-yellow-600 text-white text-xs font-semibold rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
-                                            Edit
+                                        <a href="{{ route('admin.siswa_edit', $siswa->id) }}"
+                                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                            Show
                                         </a>
 
-                                        <form action="{{ route('admin.matakuliah_destroy', $matkul->id) }}" method="POST"
+                                        <form action="{{ route('admin.siswa_destroy', $siswa->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -63,7 +65,7 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#kelasTable').DataTable({
+                $('#siswaTable').DataTable({
                     "processing": true,
                     "serverSide": false,
                     "paging": true,

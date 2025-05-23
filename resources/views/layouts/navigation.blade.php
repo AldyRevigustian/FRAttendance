@@ -17,19 +17,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.mahasiswa')" :active="request()->routeIs('admin.mahasiswa*')">
-                        {{ __('Mahasiswa') }}
+                    <x-nav-link :href="route('admin.siswa')" :active="request()->routeIs('admin.siswa*')">
+                        {{ __('Siswa') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('admin.kelas')" :active="request()->routeIs('admin.kelas*')">
                         {{ __('Kelas') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.matakuliah')" :active="request()->routeIs('admin.matakuliah*')">
-                        {{ __('Matakuliah') }}
                     </x-nav-link>
                 </div>
 

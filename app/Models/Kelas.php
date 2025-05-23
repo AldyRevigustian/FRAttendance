@@ -14,9 +14,9 @@ class Kelas extends Model
         'nama'
     ];
 
-    public function mahasiswas()
+    public function siswas()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Siswa::class);
     }
 
     public function absensies()

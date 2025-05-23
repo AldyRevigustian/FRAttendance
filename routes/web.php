@@ -5,8 +5,8 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\DosenAuthController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
@@ -33,16 +33,16 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         return redirect()->route('admin.dashboard');
     });
 
-    Route::prefix('mahasiswa')->controller(App\Http\Controllers\Admin\MahasiswaController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.mahasiswa');
-        Route::get('/create', 'create')->name('admin.mahasiswa_create');
-        Route::post('/create/store', 'store')->name('admin.mahasiswa_store');
+    Route::prefix('siswa')->controller(App\Http\Controllers\Admin\SiswaController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.siswa');
+        Route::get('/create', 'create')->name('admin.siswa_create');
+        Route::post('/create/store', 'store')->name('admin.siswa_store');
 
-        Route::get('/edit/{id}', 'edit')->name('admin.mahasiswa_edit');
-        Route::put('/update/{id}', 'update')->name('admin.mahasiswa_update');
+        Route::get('/edit/{id}', 'edit')->name('admin.siswa_edit');
+        Route::put('/update/{id}', 'update')->name('admin.siswa_update');
 
-        Route::delete('/{id}', 'destroy')->name('admin.mahasiswa_destroy');
-        Route::post('/verify', 'verify')->name('admin.mahasiswa_verify');
+        Route::delete('/{id}', 'destroy')->name('admin.siswa_destroy');
+        Route::post('/verify', 'verify')->name('admin.siswa_verify');
     });
 
     Route::prefix('kelas')->controller(App\Http\Controllers\Admin\KelasController::class)->group(function () {
@@ -54,17 +54,6 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         Route::put('/update/{id}', 'update')->name('admin.kelas_update');
 
         Route::delete('/{id}', 'destroy')->name('admin.kelas_destroy');
-    });
-
-    Route::prefix('matakuliah')->controller(App\Http\Controllers\Admin\MatakuliahController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.matakuliah');
-        Route::get('/create', 'create')->name('admin.matakuliah_create');
-        Route::post('/create/store', 'store')->name('admin.matakuliah_store');
-
-        Route::get('/edit/{id}', 'edit')->name('admin.matakuliah_edit');
-        Route::put('/update/{id}', 'update')->name('admin.matakuliah_update');
-
-        Route::delete('/{id}', 'destroy')->name('admin.matakuliah_destroy');
     });
 
     Route::prefix('absensi')->controller(App\Http\Controllers\Admin\AbsensiController::class)->group(function () {
@@ -97,14 +86,6 @@ Route::prefix('dosen')->middleware(['dosen'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('dosen.dashboard');
     });
-
-    // Route::resource('mahasiswa', MahasiswaController::class);
-    // Route::resource('kelas', KelasController::class);
-    // Route::resource('matakuliah', MataKuliahController::class);
-    // Route::resource('absensi', AbsensiController::class);
-
-    // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    //     ->name('logout');
 });
 
 

@@ -14,23 +14,17 @@ class Absensi extends Model
         'id',
         'tanggal',
         'kelas_id',
-        'mata_kuliah_id',
-        'mahasiswa_id'
+        'siswa_id'
     ];
 
 
-    public function mahasiswa()
+    public function siswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Siswa::class);
     }
 
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
-    }
-
-    public function mataKuliah()
-    {
-        return $this->belongsTo(MataKuliah::class);
     }
 }
