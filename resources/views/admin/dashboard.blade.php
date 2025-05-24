@@ -472,7 +472,7 @@
                             refreshButton.disabled = false;
                         });
                 }
-            });
+                });
         </script>
     @endpush
 </x-app-layout>
