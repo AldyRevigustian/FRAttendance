@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->tinyInteger('jenis_kelamin')->comment('0 = Laki-laki, 1 = Perempuan');
             $table->foreignId('kelas_id')->constrained("kelas")->onDelete('cascade')->onUpdate('cascade');
             $table->boolean("is_trained")->default(0);
             $table->timestamps();

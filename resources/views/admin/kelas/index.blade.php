@@ -26,8 +26,9 @@
                         <thead>
                             <tr>
                                 <th class="w-2">No</th>
-                                <th>Nama Kelas</th>
-                                <th class="w-1/6">Aksi</th>
+                                <th class="w-1/12">Nama Kelas</th>
+                                <th>Wali Kelas</th>
+                                <th class="w-1/12">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,23 +36,35 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $kelasItem->nama }}</td>
+                                    <td>{{ $kelasItem->guru->nama }}</td>
                                     <td class="flex space-x-2">
-                                        <!-- Edit Button -->
                                         <a href="{{ route('admin.kelas_edit', $kelasItem->id) }}"
-                                            class="inline-flex items-center px-3 py-1.5 bg-yellow-600 text-white text-xs font-semibold rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
-                                            Edit
+                                            class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path
+                                                    d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
                                         </a>
-
-                                        <!-- Delete Button -->
                                         <form action="{{ route('admin.kelas_destroy', $kelasItem->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                                                Hapus
+                                                class="inline-flex items-center justify-center p-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-150"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                <span class="sr-only">Hapus Kelas</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
                                             </button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach

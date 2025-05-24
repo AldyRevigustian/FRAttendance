@@ -22,6 +22,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.guru')" :active="request()->routeIs('admin.guru*')">
+                        {{ __('Guru') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('admin.kelas')" :active="request()->routeIs('admin.kelas*')">
                         {{ __('Kelas') }}
                     </x-nav-link>
@@ -30,12 +35,6 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('admin.absensi')" :active="request()->routeIs('admin.absensi*')">
                         {{ __('Absensi') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.training')" :active="request()->routeIs('admin.training*')">
-                        {{ __('Training') }}
                     </x-nav-link>
                 </div>
             </div>

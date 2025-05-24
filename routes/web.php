@@ -45,6 +45,17 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         Route::post('/verify', 'verify')->name('admin.siswa_verify');
     });
 
+    Route::prefix('guru')->controller(App\Http\Controllers\Admin\GuruController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.guru');
+        Route::get('/create', 'create')->name('admin.guru_create');
+        Route::post('/create/store', 'store')->name('admin.guru_store');
+
+        Route::get('/edit/{id}', 'edit')->name('admin.guru_edit');
+        Route::put('/update/{id}', 'update')->name('admin.guru_update');
+
+        Route::delete('/{id}', 'destroy')->name('admin.guru_destroy');
+    });
+
     Route::prefix('kelas')->controller(App\Http\Controllers\Admin\KelasController::class)->group(function () {
         Route::get('/', 'index')->name('admin.kelas');
         Route::get('/create', 'create')->name('admin.kelas_create');
@@ -67,11 +78,6 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         Route::delete('/{id}', 'destroy')->name('admin.absensi_destroy');
     });
 
-    Route::prefix('training')->controller(App\Http\Controllers\Admin\TrainingController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.training');
-        Route::get('/create', 'create')->name('admin.training_create');
-        Route::post('/create/store', 'store')->name('admin.training_store');
-    });
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');

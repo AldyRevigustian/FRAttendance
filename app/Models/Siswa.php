@@ -14,7 +14,8 @@ class Siswa extends Model
         'nis',
         'nama',
         'kelas_id',
-        'is_trained'
+        'is_trained',
+        'jenis_kelamin'
     ];
     public function kelas()
     {

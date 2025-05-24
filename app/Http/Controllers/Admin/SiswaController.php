@@ -47,12 +47,32 @@ class SiswaController extends Controller
         return view('admin.siswa.create', compact('kelas'));
     }
 
+    public function train()
+    {
+        $pythonScript1 = base_path('scripts/augmentasi.py');
+        $pythonScript2 = base_path('scripts/train.py');
+
+        $command1 = "python $pythonScript1";
+        $command2 = "python $pythonScript2";
+
+        exec($command1, $output1, $status1);
+        exec($command2, $output2, $status2);
+
+        if ($status1 === 0 && $status2 === 0) {
+            Siswa::query()->update(['is_trained' => 1]);
+            return redirect()->route('admin.training')->with('success', 'Training Siswa berhasil ');
+        } else {
+            return redirect()->route('admin.training')->with('error', 'Terjadi kesalahan saat Training');
+        }
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'nis' => 'required|string|max:255|unique:siswas,id',
             'nama' => 'required|string|max:255',
             'kelas_id' => 'required|exists:kelas,id',
+            'jenis_kelamin' => 'required|in:0,1', // 0 = Laki-laki, 1 = Perempuan
             'photos' => 'required|array|min:5',
         ]);
 

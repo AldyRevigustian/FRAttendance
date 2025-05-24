@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Guru extends Authenticatable
 {
-    use HasApiTokens, Notifiable; // Use the trait
+    use HasApiTokens, Notifiable, HasFactory; // Use the trait
     protected $table = 'gurus';
     protected $fillable = [
         'kode',

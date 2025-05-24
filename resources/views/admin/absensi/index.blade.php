@@ -24,23 +24,59 @@
                     <table id="absensiTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">ID Siswa</th>
+                                <th class="w-2">No</th>
+                                <th class="w-2">NIS</th>
                                 <th>Nama Siswa</th>
                                 <th class="w-1/12">Kelas</th>
-                                <th class="w-1/6">Tanggal</th>
+                                <th class="w-1/12 text-center">Masuk</th>
+                                <th class="w-1/12 text-center">Keluar</th>
+                                <th class="w-[180px]">Tanggal</th>
                                 <th class="w-1/12">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($absensis as $absensi)
+                            @foreach ($absensis as $key => $absensi)
                                 <tr>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $absensi->siswa->id }}</td>
                                     <td>{{ $absensi->siswa->nama }}</td>
                                     <td>{{ $absensi->kelas->nama }}</td>
+                                    <td class="text-center align-middle ">
+                                        <label class="inline-flex items-center space-x-2 cursor-pointer mr-[20px]">
+                                            <input type="checkbox" disabled checked
+                                                class="w-5 h-5 text-green-600 bg-green-100 border-green-400 rounded focus:ring-green-500 cursor-not-allowed" />
+                                        </label>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <label class="inline-flex items-center space-x-2 cursor-pointer mr-[20px]">
+                                            <input type="checkbox" disabled {{ 0 ? 'checked' : '' }}
+                                                class="@if (0) w-5 h-5 text-red-600 bg-red-100 border-red-400 focus:ring-red-500 @else w-5 h-5 bg-red-50 border-red-200 cursor-not-allowed opacity-50 @endif rounded" />
+                                        </label>
+                                    </td>
                                     <td>{{ $absensi->tanggal }}</td>
-                                    <td class="flex space-x-2">
+
+                                    {{-- <td class="flex space-x-2">
                                         <form action="{{ route('admin.absensi_destroy', $absensi->id) }}" method="POST"
                                             style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td> --}}
+
+                                    <td class="flex space-x-2">
+                                        <!-- Edit Button -->
+                                        <a href="{{ route('admin.kelas_edit', $absensi->id) }}"
+                                            class="inline-flex items-center px-3 py-1.5 bg-yellow-600 text-white text-xs font-semibold rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                            Edit
+                                        </a>
+
+                                        <!-- Delete Button -->
+                                        <form action="{{ route('admin.absensi_destroy', $absensi->id) }}"
+                                            method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
