@@ -191,7 +191,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button type="button" id="apply-trend-filter" class="ml-2 px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 transition-all duration-200">
+                                    <button type="button" id="apply-trend-filter" class="ml-2 px-3 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 transition-all duration-200">
                                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                         </svg>
@@ -545,7 +545,8 @@
                         },
                         series: [{
                             name: 'Absensi',
-                            data: @json($absensiByKelas->pluck('absensies_count')->toArray())
+                            data: @json($absensiByKelas->pluck('absensies_count')->toArray()),
+
                         }],
                         xaxis: {
                             categories: @json($absensiByKelas->pluck('nama')->toArray()),
@@ -554,7 +555,8 @@
                                     fontSize: '12px',
                                     fontWeight: 500
                                 }
-                            }
+                            },
+                            stepSize: 1
                         },
                         colors: ['#F59E0B'],
                         plotOptions: {
