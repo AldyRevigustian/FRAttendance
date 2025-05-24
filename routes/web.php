@@ -24,9 +24,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::prefix('admin')->middleware(['admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/export', [App\Http\Controllers\Admin\DashboardController::class, 'exportAbsensi'])->name('admin.dashboard.export');
 
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
