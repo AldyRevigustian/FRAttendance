@@ -25,6 +25,7 @@ class DashboardController extends Controller
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
 
         $selectedKelasId = $request->input('kelas_id');
+        $trendKelasId = $request->input('trend_kelas_id');
 
         $recentAbsensiQuery = Absensi::with(['siswa', 'kelas'])
             ->orderBy('tanggal', 'desc');
@@ -53,7 +54,13 @@ class DashboardController extends Controller
             $date = $date->subDays($i);
 
             $query = Absensi::whereDate('tanggal', $date);
-            if ($selectedKelasId) {
+
+            // If this is a trend-specific filter
+            if ($request->has('trend_kelas_id') && $trendKelasId) {
+                $query->where('kelas_id', $trendKelasId);
+            }
+            // Otherwise use the global filter if present
+            elseif ($selectedKelasId) {
                 $query->where('kelas_id', $selectedKelasId);
             }
 
@@ -72,6 +79,8 @@ class DashboardController extends Controller
                 'totalKelas' => $totalKelas,
                 'totalAbsensiHariIni' => $totalAbsensiHariIni,
                 'absensiTrend' => $absensiTrend,
+                'trendKelasId' => $trendKelasId, // Include the trend class filter info
+                'selectedKelasId' => $selectedKelasId, // Include the global class filter info
                 'absensiByKelas' => $absensiByKelas->map(function ($kelas) {
                     return [
                         'nama' => $kelas->nama,
@@ -98,6 +107,7 @@ class DashboardController extends Controller
             'absensiTrend',
             'allKelas',
             'selectedKelasId',
+            'trendKelasId',
             'startDate',
             'endDate'
         ));
