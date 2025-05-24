@@ -15,7 +15,7 @@
                         <div class="mb-6">
                             <label for="nis"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">NIS</label>
-                            <input type="text" name="nis" id="nis"
+                            <input type="text" name="nis" id="nis" placeholder="Masukkan NIS"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
                         </div>
@@ -23,10 +23,25 @@
                         <div class="mb-6">
                             <label for="nama"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Nama</label>
-                            <input type="text" name="nama" id="nama"
+                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
                         </div>
+
+                        <div class="mb-6">
+                            <label for="jenis_kelamin"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                required>
+                                <option value="" selected disabled>-- Jenis Kelamin --</option>
+                                <option value="0">Laki-laki
+                                </option>
+                                <option value="1">Perempuan
+                                </option>
+                            </select>
+                        </div>
+
 
                         <div class="mb-6">
                             <label for="kelas_id"
@@ -34,6 +49,7 @@
                             <select name="kelas_id" id="kelas_id"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                                <option value="" selected disabled>-- Pilih Kelas --</option>
                                 @foreach ($kelas as $kelasItem)
                                     <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama }}</option>
                                 @endforeach

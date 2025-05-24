@@ -26,7 +26,7 @@
                         <thead>
                             <tr>
                                 <th class="w-2">No</th>
-                                <th class="w-1/12">Nama Kelas</th>
+                                <th class="w-1/12">Kelas</th>
                                 <th>Wali Kelas</th>
                                 <th class="w-1/12">Aksi</th>
                             </tr>

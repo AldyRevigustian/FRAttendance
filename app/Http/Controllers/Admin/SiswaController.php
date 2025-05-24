@@ -66,36 +66,25 @@ class SiswaController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
+        $siswa = Siswa::findOrFail($id);
+
         $request->validate([
-            'nis' => 'required|string|max:255|unique:siswas,id',
             'nama' => 'required|string|max:255',
             'kelas_id' => 'required|exists:kelas,id',
-            'jenis_kelamin' => 'required|in:0,1', // 0 = Laki-laki, 1 = Perempuan
-            'photos' => 'required|array|min:5',
+            'jenis_kelamin' => 'required|in:0,1',
         ]);
 
-        $siswa = Siswa::create([
-            'id' => $request->nis,
+        $siswa->update([
             'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
             'kelas_id' => $request->kelas_id,
         ]);
 
-        $folderPath = base_path("scripts/Images/{$siswa->id}");
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0755, true);
-        }
-
-        foreach ($request->photos as $index => $photo) {
-            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
-            $filePath = $folderPath . "/{$index}.jpg";
-            file_put_contents($filePath, $imageData);
-        }
-
-
-        return redirect()->route('admin.siswa')->with('success', 'Siswa berhasil ditambahkan');
+        return redirect()->route('admin.siswa')->with('success', 'Data siswa berhasil diperbarui.');
     }
+
 
     public function edit($id)
     {

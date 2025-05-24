@@ -11,7 +11,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 });
@@ -93,8 +92,6 @@ Route::prefix('guru')->middleware(['guru'])->group(function () {
         return redirect()->route('guru.dashboard');
     });
 });
-
-
 
 Route::get('/images/{id}/{filename}', function ($id, $filename) {
     $path = base_path("scripts/Images/{$id}/{$filename}");
