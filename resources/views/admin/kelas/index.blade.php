@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $kelasItem->nama }}</td>
-                                    <td>{{ $kelasItem->guru->nama }}</td>
+                                    <td>{{ $kelasItem->guru != null ? $kelasItem->guru->nama : '-' }}</td>
                                     <td class="flex space-x-2">
                                         <a href="{{ route('admin.kelas_edit', $kelasItem->id) }}"
                                             class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">
