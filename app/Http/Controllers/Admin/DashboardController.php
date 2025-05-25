@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $totalSiswa = Siswa::count();
         $totalGuru = Guru::count();
         $totalKelas = Kelas::count();
-        $totalAbsensiHariIni = Absensi::whereDate('updated_at', Carbon::today())->count();
+        $totalAbsensiHariIni = Absensi::whereDate('tanggal', Carbon::today())->count();
 
         $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now();
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $trendKelasId = $request->input('trend_kelas_id');
 
         $recentAbsensiQuery = Absensi::with(['siswa', 'kelas'])
-            ->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc');
 
         if ($selectedKelasId) {
             $recentAbsensiQuery->where('kelas_id', $selectedKelasId);
@@ -39,7 +39,7 @@ class DashboardController extends Controller
         $allKelas = Kelas::orderBy('nama')->get();
 
         $absensiByKelas = Kelas::withCount(['absensies' => function ($query) use ($startDate, $endDate) {
-            $query->whereBetween('created_at', [$startDate->startOfDay(), $endDate->endOfDay()]);
+            $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
         }])
             ->get()
             ->sortByDesc('absensies_count');
@@ -53,7 +53,7 @@ class DashboardController extends Controller
             $date = clone $endDate;
             $date = $date->subDays($i);
 
-            $query = Absensi::whereDate('created_at', $date);
+            $query = Absensi::whereDate('tanggal', $date);
 
             if ($request->has('trend_kelas_id') && $trendKelasId) {
                 $query->where('kelas_id', $trendKelasId);
@@ -87,7 +87,7 @@ class DashboardController extends Controller
                 }),
                 'recentAbsensi' => $recentAbsensi->map(function ($absensi) {
                     return [
-                        'tanggal' => Carbon::parse($absensi->created_at)->format('d M Y H:i'),
+                        'tanggal' => Carbon::parse($absensi->updated_at)->format('d M Y H:i'),
                         'siswa' => $absensi->siswa->nama,
                         'kelas' => $absensi->kelas->nama
                     ];
@@ -118,8 +118,8 @@ class DashboardController extends Controller
         $kelasId = $request->input('kelas_id');
 
         $query = Absensi::with(['siswa', 'kelas'])
-            ->whereBetween('created_at', [$startDate->startOfDay(), $endDate->endOfDay()])
-            ->orderBy('created_at', 'desc');
+            ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
+            ->orderBy('tanggal', 'desc');
 
         if ($kelasId) {
             $query->where('kelas_id', $kelasId);
@@ -146,7 +146,7 @@ class DashboardController extends Controller
 
             foreach ($absensi as $record) {
                 fputcsv($file, [
-                    Carbon::parse($record->created_at)->format('Y-m-d H:i:s'),
+                    Carbon::parse($record->tanggal)->format('Y-m-d H:i:s'),
                     $record->siswa->nama,
                     $record->kelas->nama
                 ]);

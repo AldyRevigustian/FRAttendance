@@ -278,7 +278,7 @@
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
                                         <td
                                             class="py-3 px-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            {{ \Carbon\Carbon::parse($absensi->tanggal)->format('d M Y H:i') }}
+                                            {{ \Carbon\Carbon::parse($absensi->updated_at)->format('d M Y H:i') }}
                                         </td>
                                         <td
                                             class="py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
@@ -342,8 +342,8 @@
                 let attendanceTrendChart, attendanceByClassChart;
                 initializeCharts();
 
-                const refreshInterval = 30000; // 30 seconds
-                let refreshTimer = setInterval(refreshData, refreshInterval); // Manual refresh button
+                const refreshInterval = 30000;
+                let refreshTimer = setInterval(refreshData, refreshInterval);
                 document.getElementById('refresh-data').addEventListener('click', function() {
                     this.classList.add('animate-pulse', 'bg-green-700');
                     const refreshIcon = this.querySelector('svg');
@@ -417,7 +417,7 @@
                     e.preventDefault();
                     refreshData();
 
-                    // Update URL with filter parameters for better UX
+
                     const formData = new FormData(this);
                     const queryString = new URLSearchParams(formData).toString();
                     history.pushState(null, null, `${window.location.pathname}?${queryString}`);
@@ -589,7 +589,7 @@
                             stepSize: 1
                         },
                         colors: @json($barColors),
-                        // colors: ['#F59E0B'],
+
                         plotOptions: {
                             bar: {
                                 horizontal: true,
@@ -637,8 +637,8 @@
 
                     const startDate = document.getElementById('start_date').value;
                     const endDate = document.getElementById('end_date').value;
-                    // Since we removed the kelas_id from main form, we need to handle it differently
-                    const kelasId = ''; // Main filter no longer has class filter
+
+                    const kelasId = '';
 
                     const exportLink = document.querySelector('a[href*="admin.dashboard.export"]');
                     if (exportLink) {
@@ -661,7 +661,7 @@
                             document.getElementById('total-absensi-hari-ini').textContent = data
                                 .totalAbsensiHariIni;
 
-                            // Update charts
+
                             attendanceTrendChart.updateSeries([{
                                 name: 'Kehadiran',
                                 data: data.absensiTrend.map(item => item.count)
@@ -672,11 +672,9 @@
                                 }
                             });
 
-                            // Sync the trend filter with main filter if both are being used
                             const trendKelasFilter = document.getElementById('trend_kelas_filter');
                             if (trendKelasFilter && !trendKelasFilter.value) {
-                                // Only sync if trend filter is set to "All Classes"
-                                // This prevents overriding a specific trend filter selection
+
                                 attendanceTrendChart.updateSeries([{
                                     name: 'Kehadiran',
                                     data: data.absensiTrend.map(item => item.count)
@@ -699,7 +697,7 @@
                                 }
                             });
 
-                            // Update recent attendance table
+
                             const tableBody = document.getElementById('recent-attendance-body');
                             tableBody.innerHTML = '';
 
@@ -729,7 +727,7 @@
                         `;
                             }
 
-                            // Animate elements to show data is refreshed
+
                             const statsElements = document.querySelectorAll('.text-3xl.font-bold');
                             statsElements.forEach(el => {
                                 el.classList.add('text-indigo-600', 'dark:text-indigo-400', 'scale-110',
@@ -740,7 +738,7 @@
                                 }, 1000);
                             });
 
-                            // Smooth animation for table rows
+
                             const tableRows = document.querySelectorAll('#recent-attendance-body tr');
                             tableRows.forEach((row, index) => {
                                 row.style.opacity = '0';

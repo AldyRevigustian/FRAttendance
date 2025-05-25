@@ -56,21 +56,24 @@ class DatabaseSeeder extends Seeder
 
         Absensi::create([
             'siswa_id' => 2702303633,
+            'kelas_id' => 1,
+            'tanggal' => now()->subDays(2)->toDateString(),   // format yyyy-mm-dd
             'waktu_masuk' => now()->subDays(2)->setTime(7, 30),
             'waktu_keluar' => now()->subDays(2)->setTime(14, 30),
-            'kelas_id' => 1,
         ]);
         Absensi::create([
             'siswa_id' => 2702303633,
-            'waktu_masuk' => now()->subDays(2)->setTime(7, 30),
-            'waktu_keluar' => now()->subDays(2)->setTime(14, 30),
             'kelas_id' => 1,
+            'tanggal' => now()->subDays(1)->toDateString(),
+            'waktu_masuk' => now()->subDays(1)->setTime(7, 30),
+            'waktu_keluar' => now()->subDays(1)->setTime(14, 30),
         ]);
         Absensi::create([
             'siswa_id' => 2702303633,
-            'waktu_masuk' => now()->subDays(2)->setTime(7, 30),
-            'waktu_keluar' => now()->subDays(2)->setTime(14, 30),
             'kelas_id' => 1,
+            'tanggal' => now()->toDateString(),
+            'waktu_masuk' => now()->setTime(7, 30),
+            'waktu_keluar' => now()->setTime(14, 30),
         ]);
     }
 }

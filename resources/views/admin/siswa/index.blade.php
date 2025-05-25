@@ -29,7 +29,7 @@
                     </div>
 
                     @if (session('success'))
-                        <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
+                        <div class="mb-4 mt-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
                             <strong class="font-medium">Success!</strong> {{ session('success') }}
                         </div>
                     @endif

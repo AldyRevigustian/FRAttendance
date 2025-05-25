@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kelas_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('siswa_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamp('waktu_masuk')->nullable();
-            $table->timestamp('waktu_keluar')->nullable();
+            $table->date('tanggal')->nullable();
+            $table->time('waktu_masuk')->nullable();
+            $table->time('waktu_keluar')->nullable();
             $table->timestamps();
         });
     }

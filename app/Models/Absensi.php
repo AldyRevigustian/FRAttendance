@@ -12,10 +12,9 @@ class Absensi extends Model
         'id',
         'siswa_id',
         'kelas_id',
+        'tanggal',
         'waktu_masuk',
         'waktu_keluar',
-        'updated_at',
-        'created_at',
     ];
 
 

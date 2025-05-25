@@ -11,11 +11,11 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <a href="{{ route('admin.absensi_create') }}"
                         class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none">
-                        Hidupkan Mesin
+                        Tambah Absensi
                     </a>
 
                     @if (session('success'))
-                        <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
+                        <div class="mb-4 mt-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
                             <strong class="font-medium">Success!</strong> {{ session('success') }}
                         </div>
                     @endif
@@ -41,9 +41,9 @@
                                     <td>{{ $absensi->siswa->id }}</td>
                                     <td>{{ $absensi->siswa->nama }}</td>
                                     <td>{{ $absensi->kelas->nama }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($absensi->created_at)->format('d-m-Y') }}</td>
-                                    <td class="text-center align-middle">
-                                        <label class="inline-flex items-center space-x-2 cursor-default">
+                                    <td>{{ \Carbon\Carbon::parse($absensi->tanggal)->format('d-m-Y') }}</td>
+                                    <td class="text-start align-start">
+                                        <label class="inline-flex items-start space-x-2 cursor-default">
                                             <input type="checkbox" disabled {{ $absensi->waktu_masuk ? 'checked' : '' }}
                                                 class="w-5 h-5 text-green-600 bg-green-100 border-green-400 rounded focus:ring-green-500 cursor-not-allowed" />
                                             <span class="text-sm text-gray-700">
@@ -51,8 +51,8 @@
                                             </span>
                                         </label>
                                     </td>
-                                    <td class="text-center align-middle">
-                                        <label class="inline-flex items-center space-x-2 cursor-default">
+                                    <td class="text-start align-start">
+                                        <label class="inline-flex items-start space-x-2 cursor-default">
                                             <input type="checkbox" disabled
                                                 {{ $absensi->waktu_keluar ? 'checked' : '' }}
                                                 class="w-5 h-5 text-red-600 bg-red-100 border-red-400 rounded focus:ring-red-500 cursor-not-allowed" />
@@ -62,7 +62,7 @@
                                         </label>
                                     </td>
                                     <td class="flex space-x-2">
-                                        <a href="{{ route('admin.kelas_edit', $absensi->id) }}"
+                                        <a href="{{ route('admin.absensi_edit', $absensi->id) }}"
                                             class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">
                                             <span class="sr-only">Edit Anggota</span> <svg
                                                 xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"

@@ -66,6 +66,7 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
         Route::delete('/{id}', 'destroy')->name('admin.kelas_destroy');
     });
 
+
     Route::prefix('absensi')->controller(App\Http\Controllers\Admin\AbsensiController::class)->group(function () {
         Route::get('/', 'index')->name('admin.absensi');
         Route::get('/create', 'create')->name('admin.absensi_create');
