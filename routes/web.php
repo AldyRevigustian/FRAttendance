@@ -41,6 +41,7 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 
         Route::delete('/{id}', 'destroy')->name('admin.siswa_destroy');
         Route::post('/verify', 'verify')->name('admin.siswa_verify');
+        Route::post('/train', 'train')->name('admin.siswa_train');
     });
 
     Route::prefix('guru')->controller(App\Http\Controllers\Admin\GuruController::class)->group(function () {

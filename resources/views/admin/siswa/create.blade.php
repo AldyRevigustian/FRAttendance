@@ -60,7 +60,7 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambil Foto</label>
                             <div class="flex justify-center">
                                 <video id="video" autoplay playsinline
-                                    class="w-full h-60 bg-gray-800 rounded-md mb-4"></video>
+                                    class="w-full h-60  rounded-md mb-4"></video>
                             </div>
                             <div class="flex justify-center">
                                 <button type="button" id="capture"
@@ -78,7 +78,7 @@
                         </div>
 
                         <button type="submit" id="submit" disabled
-                            class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-400 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white text-sm font-semibold rounded-md focus:outline-none mb-4">
                             Simpan
                         </button>
 

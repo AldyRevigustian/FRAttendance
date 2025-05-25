@@ -34,7 +34,6 @@ class SiswaController extends Controller
         return response()->json($result);
     }
 
-
     public function index()
     {
         $siswas = Siswa::with('kelas')->get();
@@ -60,12 +59,44 @@ class SiswaController extends Controller
 
         if ($status1 === 0 && $status2 === 0) {
             Siswa::query()->update(['is_trained' => 1]);
-            return redirect()->route('admin.training')->with('success', 'Training Siswa berhasil ');
+            return redirect()->route('admin.siswa')->with('success', 'Training Siswa berhasil ');
         } else {
-            return redirect()->route('admin.training')->with('error', 'Terjadi kesalahan saat Training');
+            return redirect()->route('admin.siswa')->with('error', 'Terjadi kesalahan saat Training');
         }
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nis' => 'required|string|max:255|unique:siswas,id',
+            'nama' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
+            'photos' => 'required|array|min:5',
+            'jenis_kelamin' => 'required|in:0,1',
+
+        ]);
+
+        $siswa = Siswa::create([
+            'id' => $request->nis,
+            'nama' => $request->nama,
+            'kelas_id' => $request->kelas_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        $folderPath = base_path("scripts/Images/{$siswa->id}");
+        if (!file_exists($folderPath)) {
+            mkdir($folderPath, 0755, true);
+        }
+
+        foreach ($request->photos as $index => $photo) {
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
+            $filePath = $folderPath . "/{$index}.jpg";
+            file_put_contents($filePath, $imageData);
+        }
+
+
+        return redirect()->route('admin.siswa')->with('success', 'Siswa berhasil ditambahkan');
+    }
     public function update(Request $request, $id)
     {
         $siswa = Siswa::findOrFail($id);
