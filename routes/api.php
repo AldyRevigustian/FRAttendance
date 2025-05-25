@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\GuruAuthController;
+use App\Http\Controllers\Api\GuruController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->prefix('guru')->group(function () {
-
-        // Route::post('/logout', [GuruAuthController::class, 'logout'])->name('logout');
-        // Route::get('/dashboard', [GuruAuthController::class, 'dashboard'])->name('dashboard');
-    });
+    Route::get('/kelas', [GuruController::class, 'kelas'])->name('guru.kelas');
+});
 Route::post('/guru/login', [GuruAuthController::class, 'login']);
