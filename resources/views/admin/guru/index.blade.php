@@ -26,6 +26,8 @@
                                 <th class="w-2">No.</th>
                                 <th class="w-3">Kode</th>
                                 <th>Nama</th>
+                                <th>Email</th>
+                                <th>Jenis - Kelamin</th>
                                 <th class="w-1/12">Aksi</th>
                             </tr>
                         </thead>
@@ -35,6 +37,8 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $guru->kode }}</td>
                                     <td>{{ $guru->nama }}</td>
+                                    <td>{{ $guru->email }}</td>
+                                    <td>{{ $guru->jenis_kelamin == 0 ? 'Laki - laki' : 'Perempuan' }}</td>
                                     <td class="flex space-x-2">
                                         <a href="{{ route('admin.guru_edit', $guru->id) }}"
                                             class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">

@@ -55,12 +55,10 @@
                         <div id="photo-container" class="grid grid-cols-5 gap-2 mt-4">
                         </div>
 
-                        <div class="flex justify-center mt-4">
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-semibold rounded-md focus:outline-none">
-                                Update Siswa
-                            </button>
-                        </div>
+                        <button type="submit" id="submit"
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none mb-4">
+                            Simpan
+                        </button>
                     </div>
                 </div>
             </div>

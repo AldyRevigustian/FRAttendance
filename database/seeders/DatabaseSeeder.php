@@ -14,58 +14,42 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin Seeder
         Admin::create([
             'nama' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make("admin"),
         ]);
 
-        // Guru Seeder
         Guru::create([
             'kode' => 'GR001',
             'nama' => 'Guru Test',
             'email' => 'guru.test@guru.com',
+            'jenis_kelamin' => 0,
             'password' => Hash::make("guru"),
         ]);
 
         Guru::factory()->count(14)->create();
 
-        //  Kelas Seeder
         $tingkatan = [10, 11, 12];
-        $huruf = range('A', 'I');
+        $huruf = range('A', 'F');
 
-        $kelasKe = 0;
-
-        // Buat kelas untuk tiap guru 1-20 dulu
-        foreach (range(1, 15) as $guruId) {
-            $t = intdiv($kelasKe, count($huruf));
-            $h = $kelasKe % count($huruf);
-            if (!isset($tingkatan[$t])) break;
-            Kelas::create([
-                'nama' => "{$tingkatan[$t]} {$huruf[$h]}",
-                'guru_id' => $guruId,
-            ]);
-            $kelasKe++;
+        $ct = 0;
+        foreach ($tingkatan as $tingkat) {
+            foreach ($huruf as $h) {
+                $guruId = $ct < 15 ? $ct + 1 : null;
+                Kelas::create([
+                    'nama' => "$tingkat $h",
+                    'guru_id' => $guruId,
+                ]);
+                $ct++;
+            }
         }
 
-        // Buat sisa kelas dengan guru random
-        $totalKelas = count($tingkatan) * count($huruf);
-        for (; $kelasKe < $totalKelas; $kelasKe++) {
-            $t = intdiv($kelasKe, count($huruf));
-            $h = $kelasKe % count($huruf);
-            if (!isset($tingkatan[$t])) break;
-            Kelas::create([
-                'nama' => "{$tingkatan[$t]} {$huruf[$h]}",
-                'guru_id' => rand(1, 15),
-            ]);
-        }
 
-        // Siswa Seeder
         Siswa::create([
             'id' => 2702303633,
             'nama' => 'Shem Josh Lowell',
-            'jenis_kelamin' => 0, // 0 = Laki-laki, 1 = Perempuan
+            'jenis_kelamin' => 0,
             'kelas_id' => 1,
             'is_trained' => 0
         ]);

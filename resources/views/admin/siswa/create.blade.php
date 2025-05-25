@@ -18,6 +18,11 @@
                             <input type="text" name="nis" id="nis" placeholder="Masukkan NIS"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('nis')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
@@ -26,6 +31,11 @@
                             <input type="text" name="nama" id="nama" placeholder="Masukkan Nama"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('nama')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
@@ -59,8 +69,7 @@
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambil Foto</label>
                             <div class="flex justify-center">
-                                <video id="video" autoplay playsinline
-                                    class="w-full h-60  rounded-md mb-4"></video>
+                                <video id="video" autoplay playsinline class="w-full h-60  rounded-md mb-4"></video>
                             </div>
                             <div class="flex justify-center">
                                 <button type="button" id="capture"

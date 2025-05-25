@@ -17,6 +17,7 @@ class Guru extends Authenticatable
         'nama',
         'email',
         'password',
+        'jenis_kelamin',
     ];
 
     public function getAuthPassword()

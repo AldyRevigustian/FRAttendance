@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->foreignId('guru_id')->constrained('gurus')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('guru_id')->nullable()->constrained('gurus')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

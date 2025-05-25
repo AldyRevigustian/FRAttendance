@@ -17,19 +17,28 @@ class GuruFactory extends Factory
 
     public function definition(): array
     {
-        $faker = \Faker\Factory::create('id_ID'); // Nama khas Indonesia
-        $name = $faker->name;
+        $faker = \Faker\Factory::create('id_ID');
 
-        // Ambil maksimal 2 kata pertama dari nama
+        $gender = $faker->randomElement(['male', 'female']);
+
+        if ($gender === 'male') {
+            $name = $faker->name('male');
+            $jenisKelamin = 0; // laki-laki
+        } else {
+            $name = $faker->name('female');
+            $jenisKelamin = 1; // perempuan
+        }
+
         $nameParts = explode(' ', $name);
         $shortName = implode('.', array_slice($nameParts, 0, 2));
-        $emailName = Str::slug($shortName, '.'); // jadi lowercase dan titik
+        $emailName = Str::slug($shortName, '.');
 
         return [
             'kode' => $faker->unique()->bothify('GR###'),
             'nama' => $name,
-            'email' => $emailName . '@edui.id',
+            'email' => $emailName . '@edu.id',
             'password' => Hash::make('password'),
+            'jenis_kelamin' => $jenisKelamin,
         ];
     }
 }

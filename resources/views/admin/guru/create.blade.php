@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tambah Siswa') }}
+            {{ __('Tambah Guru') }}
         </h2>
     </x-slot>
 
@@ -9,15 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('admin.siswa_store') }}" method="POST">
+                    <form action="{{ route('admin.guru_store') }}" method="POST">
                         @csrf
-
                         <div class="mb-6">
-                            <label for="nis"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">NIS</label>
-                            <input type="text" name="nis" id="nis"
+                            <label for="kode"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Kode</label>
+                            <input type="text" name="kode" id="kode"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('kode')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
@@ -26,151 +30,60 @@
                             <input type="text" name="nama" id="nama"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('nama')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
-                            <label for="kelas_id"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Kelas</label>
-                            <select name="kelas_id" id="kelas_id"
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Email</label>
+                            <input type="email" name="email" id="email"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
-                                @foreach ($kelas as $kelasItem)
-                                    <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama }}</option>
-                                @endforeach
+                            @error('email')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="password"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Password</label>
+                            <input type="password" name="password" id="password"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                required>
+                            @error('password')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="jenis_kelamin"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                required>
+                                <option value="" selected disabled>-- Jenis Kelamin --</option>
+                                <option value="0">Laki-laki
+                                </option>
+                                <option value="1">Perempuan
+                                </option>
                             </select>
                         </div>
 
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambil Foto</label>
-                            <div class="flex justify-center">
-                                <video id="video" autoplay playsinline
-                                    class="w-full h-60 bg-gray-800 rounded-md mb-4"></video>
-                            </div>
-                            <div class="flex justify-center">
-                                <button type="button" id="capture"
-                                    class="inline-flex items-center px-6 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                                    Capture Foto
-                                </button>
-                            </div>
-                            <div id="photo-container" class="grid grid-cols-5 gap-2 mt-4"></div>
-                            <div class="flex justify-center mt-4">
-                                <button type="button" id="verify"
-                                    class="hidden inline-flex items-center px-6 py-2 bg-yellow-600 text-white text-sm font-semibold rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 disabled:opacity-50">
-                                    Verifikasi
-                                </button>
-                            </div>
-                        </div>
-
-                        <button type="submit" id="submit" disabled
-                            class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-400 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
+                        <button type="submit" id="submit"
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none mb-4">
                             Simpan
                         </button>
-
-                        <input type="hidden" name="photos[]" id="photo1">
-                        <input type="hidden" name="photos[]" id="photo2">
-                        <input type="hidden" name="photos[]" id="photo3">
-                        <input type="hidden" name="photos[]" id="photo4">
-                        <input type="hidden" name="photos[]" id="photo5">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        const video = document.getElementById('video');
-        const captureButton = document.getElementById('capture');
-        const verifyButton = document.getElementById('verify');
-        const photoContainer = document.getElementById('photo-container');
-        const photoInputs = [
-            document.getElementById('photo1'),
-            document.getElementById('photo2'),
-            document.getElementById('photo3'),
-            document.getElementById('photo4'),
-            document.getElementById('photo5'),
-        ];
-
-        navigator.mediaDevices.getUserMedia({
-                video: true
-            })
-            .then((stream) => {
-                video.srcObject = stream;
-            })
-            .catch((err) => {
-                console.error("Error akses kamera:", err);
-            });
-
-        let photoCount = 0;
-
-        captureButton.addEventListener('click', () => {
-            if (photoCount >= 5) {
-                alert('Anda hanya dapat mengambil 5 foto.');
-                return;
-            }
-
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            const photoData = canvas.toDataURL('image/png');
-
-            const img = document.createElement('img');
-            img.src = photoData;
-            img.className = 'w-full h-full object-cover rounded-md';
-            photoContainer.appendChild(img);
-
-            photoInputs[photoCount].value = photoData;
-
-            photoCount++;
-
-            if (photoCount === 5) {
-                verifyButton.classList.remove('hidden');
-            }
-        });
-
-        verifyButton.addEventListener('click', async () => {
-            const photos = photoInputs.map(input => input.value);
-
-            if (photos.length !== 5) {
-                alert("Harap ambil 5 foto sebelum memverifikasi.");
-                return;
-            }
-
-            verifyButton.setAttribute('disabled', 'true');
-            verifyButton.textContent = "Memverifikasi...";
-
-            try {
-                const response = await fetch('{{ route('admin.siswa_verify') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        photos
-                    })
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert("Semua foto berhasil diverifikasi!");
-
-                    document.getElementById('submit').disabled = false;
-                } else {
-                    alert("Beberapa foto tidak memiliki wajah. Periksa foto berikut:\n" +
-                        result.details.map((valid, index) =>
-                            `Foto ${index + 1}: ${valid ? 'Valid' : 'Tidak Valid'}`).join("\n"));
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Terjadi kesalahan saat memverifikasi foto.");
-            } finally {
-                verifyButton.setAttribute('disabled', 'false');
-                verifyButton.textContent = "Verifikasi";
-            }
-        });
-    </script>
 </x-app-layout>
