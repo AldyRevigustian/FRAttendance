@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $totalKelas = Kelas::count();
         $totalAbsensiHariIni = Absensi::whereDate('updated_at', Carbon::today())->count();
 
-        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now()->subDays(6);
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now();
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
 
         $selectedKelasId = $request->input('kelas_id');
@@ -46,7 +46,7 @@ class DashboardController extends Controller
 
 
         $absensiTrend = [];
-        $dateRange = $endDate->diffInDays($startDate) + 1;
+        $dateRange = $endDate->diffInDays($startDate) + 2;
         $dateRange = min($dateRange, 30);
 
         for ($i = $dateRange - 1; $i >= 0; $i--) {
@@ -55,11 +55,9 @@ class DashboardController extends Controller
 
             $query = Absensi::whereDate('created_at', $date);
 
-            // If this is a trend-specific filter
             if ($request->has('trend_kelas_id') && $trendKelasId) {
                 $query->where('kelas_id', $trendKelasId);
             }
-            // Otherwise use the global filter if present
             elseif ($selectedKelasId) {
                 $query->where('kelas_id', $selectedKelasId);
             }
@@ -79,8 +77,8 @@ class DashboardController extends Controller
                 'totalKelas' => $totalKelas,
                 'totalAbsensiHariIni' => $totalAbsensiHariIni,
                 'absensiTrend' => $absensiTrend,
-                'trendKelasId' => $trendKelasId, // Include the trend class filter info
-                'selectedKelasId' => $selectedKelasId, // Include the global class filter info
+                'trendKelasId' => $trendKelasId,
+                'selectedKelasId' => $selectedKelasId,
                 'absensiByKelas' => $absensiByKelas->map(function ($kelas) {
                     return [
                         'nama' => $kelas->nama,

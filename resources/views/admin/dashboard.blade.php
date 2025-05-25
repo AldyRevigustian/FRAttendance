@@ -8,11 +8,13 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Filter Controls -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg mb-6 border-t-4 border-indigo-600">
+            <div
+                class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg mb-6 border-t-4 border-indigo-600">
                 <div class="p-6">
                     <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center">
                         <svg class="h-5 w-5 text-indigo-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                         </svg>
                         Filter Data
                     </h3>
@@ -24,8 +26,10 @@
                                 Mulai</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                                 <input type="date" id="start_date" name="start_date"
@@ -39,8 +43,10 @@
                                 Akhir</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                                 <input type="date" id="end_date" name="end_date"
@@ -52,7 +58,8 @@
                             <button type="submit"
                                 class="flex items-center justify-center px-4 py-3 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-200 active:bg-indigo-700 transition duration-150 ease-in-out">
                                 <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                                 </svg>
                                 Filter
                             </button>
@@ -80,7 +87,8 @@
             <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <!-- Total Students Card -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div
+                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-indigo-500">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-indigo-500 bg-opacity-85 shadow-md">
@@ -91,7 +99,8 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <div id="total-siswa" class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
+                                <div id="total-siswa"
+                                    class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                     {{ $totalSiswa }}</div>
                                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Siswa</div>
                             </div>
@@ -100,7 +109,8 @@
                 </div>
 
                 <!-- Total Teachers Card -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div
+                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-green-500">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-green-500 bg-opacity-85 shadow-md">
@@ -111,7 +121,8 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <div id="total-guru" class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
+                                <div id="total-guru"
+                                    class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                     {{ $totalGuru }}</div>
                                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guru</div>
                             </div>
@@ -120,7 +131,8 @@
                 </div>
 
                 <!-- Total Classes Card -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div
+                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-yellow-500">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-yellow-500 bg-opacity-85 shadow-md">
@@ -131,7 +143,8 @@
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <div id="total-kelas" class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
+                                <div id="total-kelas"
+                                    class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                     {{ $totalKelas }}</div>
                                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Kelas</div>
                             </div>
@@ -140,7 +153,8 @@
                 </div>
 
                 <!-- Today's Attendance Card -->
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div
+                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-red-500">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-red-500 bg-opacity-85 shadow-md">
@@ -154,7 +168,8 @@
                                 <div id="total-absensi-hari-ini"
                                     class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                     {{ $totalAbsensiHariIni }}</div>
-                                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Absensi Hari Ini</div>
+                                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Absensi Hari Ini
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,36 +179,47 @@
             <!-- Charts and Tables Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                 <!-- Attendance Trend Chart -->
-                <div class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
+                <div
+                    class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
                     <div class="p-6 pb-20 border-t-4 border-indigo-500">
                         <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-4">
-                            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-2 lg:mb-0 flex items-center">
-                                <svg class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            <h3
+                                class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-2 lg:mb-0 flex items-center">
+                                <svg class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                                 </svg>
                                 Trend Absensi
                             </h3>
                             <div class="relative w-full lg:w-64">
                                 <div class="flex items-center">
                                     <div class="relative flex-grow">
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                        <div
+                                            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                             </svg>
                                         </div>
                                         <select id="trend_kelas_filter"
                                             class="pl-10 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition-all duration-200">
                                             <option value="">Semua Kelas</option>
                                             @foreach ($allKelas as $kelas)
-                                                <option value="{{ $kelas->id }}" {{ isset($trendKelasId) && $trendKelasId == $kelas->id ? 'selected' : '' }}>
+                                                <option value="{{ $kelas->id }}"
+                                                    {{ isset($trendKelasId) && $trendKelasId == $kelas->id ? 'selected' : '' }}>
                                                     {{ $kelas->nama }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button type="button" id="apply-trend-filter" class="ml-2 px-3 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 transition-all duration-200">
-                                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    <button type="button" id="apply-trend-filter"
+                                        class="ml-2 px-3 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200 transition-all duration-200">
+                                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7" />
                                         </svg>
                                     </button>
                                 </div>
@@ -203,11 +229,14 @@
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
+                <div
+                    class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
                     <div class="p-6 border-t-4 border-yellow-500">
                         <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-0 flex items-center">
-                            <svg class="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            <svg class="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                             Absensi per Kelas
                         </h3>
@@ -217,16 +246,20 @@
             </div>
 
             <!-- Recent Attendance Table -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg mb-6 border-t-4 border-green-500">
+            <div
+                class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg mb-6 border-t-4 border-green-500">
                 <div class="p-6">
                     <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center">
-                        <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                         Absensi Terbaru
                     </h3>
                     <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-                        <table id="recent-attendance-table" class="min-w-full bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <table id="recent-attendance-table"
+                            class="min-w-full bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr class="bg-gray-50 dark:bg-gray-700">
                                     <th
@@ -243,14 +276,18 @@
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700" id="recent-attendance-body">
                                 @foreach ($recentAbsensi as $absensi)
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
-                                        <td class="py-3 px-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                        <td
+                                            class="py-3 px-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                                             {{ \Carbon\Carbon::parse($absensi->tanggal)->format('d M Y H:i') }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                                        <td
+                                            class="py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
                                             {{ $absensi->siswa->nama }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                            <span class="px-2 py-1 text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-800 dark:text-indigo-100 rounded-full">
+                                        <td
+                                            class="py-3 px-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-800 dark:text-indigo-100 rounded-full">
                                                 {{ $absensi->kelas->nama }}
                                             </span>
                                         </td>
@@ -260,8 +297,10 @@
                                     <tr>
                                         <td colspan="3"
                                             class="py-6 px-4 text-sm text-gray-500 dark:text-gray-300 text-center">
-                                            <svg class="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                            <svg class="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                             </svg>
                                             Tidak ada data absensi terbaru
                                         </td>
@@ -275,7 +314,8 @@
                             class="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium text-sm transition-colors duration-150">
                             Lihat Semua
                             <svg class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6" />
                             </svg>
                         </a>
                     </div>
@@ -285,18 +325,25 @@
         </div>
     </div>
 
+    @php
+        function stringToColor($string)
+        {
+            $code = substr(md5($string), 0, 6);
+            return '#' . strtoupper($code);
+        }
+
+        $barColors = $absensiByKelas->pluck('nama')->map(fn($nama) => stringToColor($nama));
+    @endphp
+
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Charts initialization
                 let attendanceTrendChart, attendanceByClassChart;
-
-                // Initialize all charts
                 initializeCharts();
 
                 const refreshInterval = 30000; // 30 seconds
-                let refreshTimer = setInterval(refreshData, refreshInterval);                // Manual refresh button
+                let refreshTimer = setInterval(refreshData, refreshInterval); // Manual refresh button
                 document.getElementById('refresh-data').addEventListener('click', function() {
                     this.classList.add('animate-pulse', 'bg-green-700');
                     const refreshIcon = this.querySelector('svg');
@@ -310,7 +357,6 @@
                     }, 1000);
                 });
 
-                // Trend filter by class
                 document.getElementById('apply-trend-filter').addEventListener('click', function() {
                     const kelasId = document.getElementById('trend_kelas_filter').value;
                     const startDate = document.getElementById('start_date').value;
@@ -318,68 +364,55 @@
 
                     this.classList.add('animate-pulse', 'bg-indigo-700');
 
-                    // Get class name for title
                     let kelasName = 'Semua Kelas';
                     if (kelasId) {
-                        const selectedOption = document.querySelector(`#trend_kelas_filter option[value="${kelasId}"]`);
+                        const selectedOption = document.querySelector(
+                            `#trend_kelas_filter option[value="${kelasId}"]`);
                         if (selectedOption) {
                             kelasName = selectedOption.textContent.trim();
                         }
                     }
 
-                    // Fetch trend data for the selected class
                     fetch(`{{ route('admin.dashboard') }}?start_date=${startDate}&end_date=${endDate}&trend_kelas_id=${kelasId}`, {
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Update only the trend chart
-                        attendanceTrendChart.updateSeries([{
-                            name: 'Kehadiran',
-                            data: data.absensiTrend.map(item => item.count)
-                        }]);
-                        attendanceTrendChart.updateOptions({
-                            xaxis: {
-                                categories: data.absensiTrend.map(item => item.label),
-                                labels: {
-                                    style: {
-                                        fontSize: '12px',
-                                        fontWeight: 500
-                                    }
-                                }
-                            },
-                            title: {
-                                text: `Trend Absensi: ${kelasName}`,
-                                align: 'left',
-                                style: {
-                                    fontSize: '14px',
-                                    fontWeight: 'bold',
-                                    color: '#718096'
-                                }
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
                             }
-                        });
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            attendanceTrendChart.updateSeries([{
+                                name: 'Kehadiran',
+                                data: data.absensiTrend.map(item => item.count)
+                            }]);
+                            attendanceTrendChart.updateOptions({
+                                xaxis: {
+                                    categories: data.absensiTrend.map(item => item.label),
+                                    labels: {
+                                        style: {
+                                            fontSize: '12px',
+                                            fontWeight: 500
+                                        }
+                                    }
+                                },
+                            });
 
-                        // Show brief animation to indicate data updated
-                        const chartEl = document.getElementById('attendance-trend-chart');
-                        chartEl.classList.add('opacity-80');
-                        setTimeout(() => {
-                            chartEl.classList.remove('opacity-80');
-                        }, 300);
-                    })
-                    .catch(error => {
-                        console.error('Error refreshing trend data:', error);
-                    })
-                    .finally(() => {
-                        setTimeout(() => {
-                            this.classList.remove('animate-pulse', 'bg-indigo-700');
-                        }, 500);
-                    });
+                            const chartEl = document.getElementById('attendance-trend-chart');
+                            chartEl.classList.add('opacity-80');
+                            setTimeout(() => {
+                                chartEl.classList.remove('opacity-80');
+                            }, 300);
+                        })
+                        .catch(error => {
+                            console.error('Error refreshing trend data:', error);
+                        })
+                        .finally(() => {
+                            setTimeout(() => {
+                                this.classList.remove('animate-pulse', 'bg-indigo-700');
+                            }, 500);
+                        });
                 });
 
 
-                // Attach filter form submit event for AJAX filtering
                 document.getElementById('dashboard-filter').addEventListener('submit', function(e) {
                     e.preventDefault();
                     refreshData();
@@ -418,15 +451,6 @@
                                     enabled: true,
                                     speed: 350
                                 }
-                            }
-                        },
-                        title: {
-                            text: '{{ isset($trendKelasId) && $trendKelasId ? "Trend Absensi: " . $allKelas->firstWhere("id", $trendKelasId)->nama : "Trend Absensi: Semua Kelas" }}',
-                            align: 'left',
-                            style: {
-                                fontSize: '14px',
-                                fontWeight: 'bold',
-                                color: '#718096'
                             }
                         },
                         series: [{
@@ -519,8 +543,9 @@
                             type: 'bar',
                             height: '100%',
                             toolbar: {
-                                show: false
+                                show: false,
                             },
+                            offsetY: -15,
                             fontFamily: 'Inter, sans-serif',
                             dropShadow: {
                                 enabled: true,
@@ -541,6 +566,11 @@
                                     enabled: true,
                                     speed: 350
                                 }
+                            },
+                            grid: {
+                                padding: {
+                                    top: 0
+                                }
                             }
                         },
                         series: [{
@@ -558,11 +588,12 @@
                             },
                             stepSize: 1
                         },
-                        colors: ['#F59E0B'],
+                        colors: @json($barColors),
+                        // colors: ['#F59E0B'],
                         plotOptions: {
                             bar: {
                                 horizontal: true,
-                                distributed: false,
+                                distributed: true,
                                 columnWidth: '100%',
                                 barHeight: '100%',
                                 dataLabels: {
@@ -573,18 +604,11 @@
                         dataLabels: {
                             enabled: false,
                         },
+                        legend: {
+                            show: false
+                        },
                         fill: {
-                            type: 'gradient',
-                            gradient: {
-                                shade: 'dark',
-                                type: 'horizontal',
-                                shadeIntensity: 0.3,
-                                gradientToColors: ['#FBBF24'],
-                                inverseColors: false,
-                                opacityFrom: 0.8,
-                                opacityTo: 1,
-                                stops: [0, 100]
-                            }
+                            type: 'solid',
                         },
                         tooltip: {
                             theme: 'dark',
@@ -618,7 +642,8 @@
 
                     const exportLink = document.querySelector('a[href*="admin.dashboard.export"]');
                     if (exportLink) {
-                        exportLink.href = `{{ route('admin.dashboard.export') }}?start_date=${startDate}&end_date=${endDate}&kelas_id=${kelasId}`;
+                        exportLink.href =
+                            `{{ route('admin.dashboard.export') }}?start_date=${startDate}&end_date=${endDate}&kelas_id=${kelasId}`;
                     } else {
                         console.warn('Export link not found in the document');
                     }
@@ -634,7 +659,7 @@
                             document.getElementById('total-guru').textContent = data.totalGuru;
                             document.getElementById('total-kelas').textContent = data.totalKelas;
                             document.getElementById('total-absensi-hari-ini').textContent = data
-                            .totalAbsensiHariIni;
+                                .totalAbsensiHariIni;
 
                             // Update charts
                             attendanceTrendChart.updateSeries([{
@@ -707,9 +732,11 @@
                             // Animate elements to show data is refreshed
                             const statsElements = document.querySelectorAll('.text-3xl.font-bold');
                             statsElements.forEach(el => {
-                                el.classList.add('text-indigo-600', 'dark:text-indigo-400', 'scale-110', 'transform');
+                                el.classList.add('text-indigo-600', 'dark:text-indigo-400', 'scale-110',
+                                    'transform');
                                 setTimeout(() => {
-                                    el.classList.remove('text-indigo-600', 'dark:text-indigo-400', 'scale-110', 'transform');
+                                    el.classList.remove('text-indigo-600', 'dark:text-indigo-400',
+                                        'scale-110', 'transform');
                                 }, 1000);
                             });
 
@@ -732,7 +759,7 @@
                             refreshButton.disabled = false;
                         });
                 }
-                });
+            });
         </script>
     @endpush
 </x-app-layout>
