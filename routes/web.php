@@ -80,9 +80,7 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 Route::prefix('guru')->middleware(['guru'])->group(function () {
     Route::prefix('{kelas_terpilih}')->middleware(['kelas.aktif'])->group(function () {
 
-        Route::get('/dashboard', function ($kelas_terpilih) {
-            return "Dashboard Guru untuk kelas ID: $kelas_terpilih";
-        })->name('guru.dashboard');
+        Route::get('/dashboard', [App\Http\Controllers\Guru\DashboardController::class, 'index'])->name('guru.dashboard');
 
         Route::prefix('absensi')->controller(App\Http\Controllers\Guru\AbsensiController::class)->group(function () {
             Route::get('/', 'index')->name('guru.absensi');
