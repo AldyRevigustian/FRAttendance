@@ -12,10 +12,27 @@ use Symfony\Component\Process\Process;
 
 class AbsensiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $absensis = Absensi::with(['siswa', 'kelas'])->get();
-        return view('admin.absensi.index', compact('absensis'));
+        $query = Absensi::with(['siswa', 'kelas']);
+
+        // Set default dates to today if no filters are provided
+        $startDate = $request->filled('start_date') ? $request->start_date : now()->toDateString();
+        $endDate = $request->filled('end_date') ? $request->end_date : now()->toDateString();
+
+        // Apply date filters
+        $query->whereDate('tanggal', '>=', $startDate)
+              ->whereDate('tanggal', '<=', $endDate);
+
+        // Apply class filter if provided
+        if ($request->filled('kelas_id')) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+
+        $absensis = $query->orderBy('tanggal', 'desc')->get();
+        $allKelas = Kelas::orderBy('nama')->get();
+
+        return view('admin.absensi.index', compact('absensis', 'allKelas', 'startDate', 'endDate'));
     }
 
     public function create()
