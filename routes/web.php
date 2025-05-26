@@ -81,6 +81,8 @@ Route::prefix('guru')->middleware(['guru'])->group(function () {
     Route::prefix('{kelas_terpilih}')->middleware(['kelas.aktif'])->group(function () {
 
         Route::get('/dashboard', [App\Http\Controllers\Guru\DashboardController::class, 'index'])->name('guru.dashboard');
+        Route::get('/dashboard/export', [App\Http\Controllers\Guru\DashboardController::class, 'export'])->name('guru.dashboard.export');
+        Route::get('/dashboard/refresh', [App\Http\Controllers\Guru\DashboardController::class, 'refresh'])->name('guru.dashboard.refresh');
 
         Route::prefix('absensi')->controller(App\Http\Controllers\Guru\AbsensiController::class)->group(function () {
             Route::get('/', 'index')->name('guru.absensi');
