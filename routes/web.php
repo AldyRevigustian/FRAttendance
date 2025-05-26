@@ -94,6 +94,11 @@ Route::prefix('guru')->middleware(['guru'])->group(function () {
 
             Route::delete('/{id}', 'destroy')->name('guru.absensi_destroy');
         });
+
+        Route::prefix('siswa')->controller(App\Http\Controllers\Guru\SiswaController::class)->group(function () {
+            Route::get('/', 'index')->name('guru.siswa');
+            Route::get('/{id}', 'show')->name('guru.siswa_show');
+        });
     });
     Route::post('logout', [GuruAuthController::class, 'logout'])
         ->name('guru.logout');
