@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         Guru::create([
             'kode' => 'GR001',
             'nama' => 'Guru Test',
-            'email' => 'guru@edu.co.id',
+            'email' => 'guru@edu.id',
             'jenis_kelamin' => 0,
             'password' => Hash::make("guru"),
         ]);
