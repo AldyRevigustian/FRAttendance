@@ -31,15 +31,15 @@ class DashboardController extends Controller
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
-        
+
         // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
         $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [
-                Carbon::now()->startOfMonth()->startOfDay(), 
+                Carbon::now()->startOfMonth()->startOfDay(),
                 Carbon::now()->endOfDay()
             ])
             ->count();
-            
+
         $totalAbsensiHariIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereDate('tanggal', Carbon::today())
             ->count();
@@ -240,15 +240,15 @@ class DashboardController extends Controller
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
-        
+
         // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
         $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [
-                Carbon::now()->startOfMonth()->startOfDay(), 
+                Carbon::now()->startOfMonth()->startOfDay(),
                 Carbon::now()->endOfDay()
             ])
             ->count();
-            
+
         $totalAbsensiHariIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereDate('tanggal', Carbon::today())
             ->count();
