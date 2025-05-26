@@ -157,9 +157,9 @@
                                 <div class="ml-5">
                                     <div id="total-absensi"
                                         class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
-                                        {{ $totalAbsensi }}
+                                        {{ $totalAbsensiBulanIni }}
                                     </div>
-                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Absensi</div>
+                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Absensi Bulan Ini</div>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
                                             </div>
                                         </div>
                                         <div class="text-sm font-semibold text-green-600 dark:text-green-400">
-                                            {{ number_format(($student->absensi_count / max($totalAbsensi, 1)) * 100, 1) }}%
+                                            {{ number_format(($student->absensi_count / max($totalAbsensiBulanIni, 1)) * 100, 1) }}%
                                         </div>
                                     </div>
                                 @endforeach
@@ -521,7 +521,7 @@
                         .then(data => {
                             // Update statistics
                             document.getElementById('total-siswa').textContent = data.totalSiswa;
-                            document.getElementById('total-absensi').textContent = data.totalAbsensi;
+                            document.getElementById('total-absensi').textContent = data.totalAbsensiBulanIni;
                             document.getElementById('rata-rata-kehadiran').textContent = data.rataRataKehadiran + '%';
                             document.getElementById('absensi-hari-ini').textContent = data.absensiHariIni;
 
@@ -543,8 +543,8 @@
                             const topStudentsList = document.getElementById('top-students-list');
                             topStudentsList.innerHTML = '';
                             data.topStudents.forEach((student, index) => {
-                                const percentage = data.totalAbsensi > 0 ? ((student.absensi_count / data
-                                    .totalAbsensi) * 100).toFixed(1) : 0;
+                                const percentage = data.totalAbsensiBulanIni > 0 ? ((student.absensi_count / data
+                                    .totalAbsensiBulanIni) * 100).toFixed(1) : 0;
                                 topStudentsList.innerHTML += `
                             <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
                                 <div class="flex items-center">

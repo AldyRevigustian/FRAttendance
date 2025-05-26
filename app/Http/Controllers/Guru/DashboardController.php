@@ -31,6 +31,15 @@ class DashboardController extends Controller
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
+        
+        // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
+        $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
+            ->whereBetween('tanggal', [
+                Carbon::now()->startOfMonth()->startOfDay(), 
+                Carbon::now()->endOfDay()
+            ])
+            ->count();
+            
         $totalAbsensiHariIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereDate('tanggal', Carbon::today())
             ->count();
@@ -109,6 +118,7 @@ class DashboardController extends Controller
             return response()->json([
                 'totalSiswa' => $totalSiswa,
                 'totalAbsensiPeriode' => $totalAbsensiPeriode,
+                'totalAbsensiBulanIni' => $totalAbsensiBulanIni,
                 'totalAbsensiHariIni' => $totalAbsensiHariIni,
                 'avgDailyAttendance' => $avgDailyAttendance,
                 'absensiTrend' => $absensiTrend,
@@ -134,6 +144,7 @@ class DashboardController extends Controller
             'kelas',
             'totalSiswa',
             'totalAbsensiPeriode',
+            'totalAbsensiBulanIni',
             'totalAbsensiHariIni',
             'avgDailyAttendance',
             'siswaAbsensiTerbanyak',
@@ -145,7 +156,7 @@ class DashboardController extends Controller
             'endDate'
         ), [
             'selectedKelas' => $kelas,
-            'totalAbsensi' => $totalAbsensiPeriode,
+            'totalAbsensi' => $totalAbsensiBulanIni,
             'rataRataKehadiran' => $avgDailyAttendance,
             'absensiHariIni' => $totalAbsensiHariIni,
             'topStudents' => $siswaAbsensiData,
@@ -229,6 +240,15 @@ class DashboardController extends Controller
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
+        
+        // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
+        $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
+            ->whereBetween('tanggal', [
+                Carbon::now()->startOfMonth()->startOfDay(), 
+                Carbon::now()->endOfDay()
+            ])
+            ->count();
+            
         $totalAbsensiHariIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereDate('tanggal', Carbon::today())
             ->count();
@@ -298,6 +318,7 @@ class DashboardController extends Controller
         return response()->json([
             'totalSiswa' => $totalSiswa,
             'totalAbsensi' => $totalAbsensiPeriode,
+            'totalAbsensiBulanIni' => $totalAbsensiBulanIni,
             'rataRataKehadiran' => $avgDailyAttendance,
             'absensiHariIni' => $totalAbsensiHariIni,
             'topStudents' => $siswaAbsensiData->map(function ($siswa) {
