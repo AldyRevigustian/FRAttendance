@@ -11,10 +11,51 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('guru.absensi_create', ['kelas_terpilih' => session('kelas_aktif')]) }}"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none">
-                        Tambah Absensi
-                    </a>
+                    <div class="flex justify-between items-center mb-4">
+                        <a href="{{ route('guru.absensi_create', ['kelas_terpilih' => session('kelas_aktif')]) }}"
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none">
+                            Tambah Absensi
+                        </a>
+
+                        <form method="GET"
+                            action="{{ route('guru.absensi', ['kelas_terpilih' => session('kelas_aktif')]) }}"
+                            class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-2">
+                                <label for="start_date"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-300">Dari:</label>
+                                <input type="date" name="start_date" id="start_date"
+                                    value="{{ request('start_date', $startDate) }}"
+                                    class="px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="end_date"
+                                    class="text-sm font-medium text-gray-700 dark:text-gray-300">Sampai:</label>
+                                <input type="date" name="end_date" id="end_date"
+                                    value="{{ request('end_date', $endDate) }}"
+                                    class="px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                            </div>
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
+                                </svg>
+                                Filter
+                            </button>
+                            @if (request('start_date') || request('end_date'))
+                                <a href="{{ route('guru.absensi', ['kelas_terpilih' => session('kelas_aktif')]) }}"
+                                    class="inline-flex items-center px-3 py-2 bg-gray-500 hover:bg-gray-600 text-white text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors duration-150">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                    Reset
+                                </a>
+                            @endif
+                        </form>
+                    </div>
 
                     @if (session('success'))
                         <div class="mb-4 mt-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
