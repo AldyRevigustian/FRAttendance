@@ -103,29 +103,6 @@
 
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="p-6 border-l-4 border-yellow-500">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-yellow-500 bg-opacity-85 shadow-md">
-                                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                    </svg>
-                                </div>
-                                <div class="ml-5">
-                                    <div id="rata-rata-kehadiran"
-                                        class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
-                                        {{ number_format($rataRataKehadiran, 1) }}%
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Kehadiran Bulan Ini
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                         <div class="p-6 border-l-4 border-red-500">
                             <div class="flex items-center">
                                 <div class="p-3 rounded-full bg-red-500 bg-opacity-85 shadow-md">
@@ -141,6 +118,29 @@
                                         {{ $absensiHariIni }}
                                     </div>
                                     <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Absensi Hari Ini
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="p-6 border-l-4 border-yellow-500">
+                            <div class="flex items-center">
+                                <div class="p-3 rounded-full bg-yellow-500 bg-opacity-85 shadow-md">
+                                    <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    </svg>
+                                </div>
+                                <div class="ml-5">
+                                    <div id="rata-rata-kehadiran"
+                                        class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
+                                        {{ number_format($rataRataKehadiran, 1) }}%
+                                    </div>
+                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Persentase Hari Ini
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +171,8 @@
                                     Filter Periode Chart
                                 </h4>
                                 <form id="chart-filter"
-                                    action="{{ route('guru.dashboard', ['kelas_terpilih' => $selectedKelas->id]) }}" method="GET"
-                                    class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    action="{{ route('guru.dashboard', ['kelas_terpilih' => $selectedKelas->id]) }}"
+                                    method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="group">
                                         <label for="start_date"
                                             class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tanggal
@@ -192,7 +192,8 @@
                                     <div class="flex items-end">
                                         <button type="submit"
                                             class="w-full flex items-center justify-center px-3 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-200 active:bg-indigo-700 transition duration-150 ease-in-out">
-                                            <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                                             </svg>
@@ -254,9 +255,26 @@
                                                     {{ $student->absensies_count }} kali hadir</p>
                                             </div>
                                         </div>
+                                        @php
+                                            $today = \Carbon\Carbon::today();
+                                            $startOfMonth = $today->copy()->startOfMonth();
+
+                                            $periode = \Carbon\CarbonPeriod::create($startOfMonth, $today);
+
+                                            $jumlahHariAktif = collect($periode)
+                                                ->filter(function ($date) {
+                                                    return $date->isWeekday();
+                                                })
+                                                ->count();
+
+                                            $totalHari = max($jumlahHariAktif, 1);
+                                            $persentase = ($student->absensies_count / $totalHari) * 100;
+                                        @endphp
+
                                         <div class="text-sm font-semibold text-green-600 dark:text-green-400">
-                                            {{ number_format(($student->absensies_count / max($totalAbsensiBulanIni, 1)) * 100, 1) }}%
+                                            {{ number_format($persentase, 1) }}%
                                         </div>
+
                                     </div>
                                 @endforeach
                             </div>
