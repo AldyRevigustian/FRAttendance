@@ -228,7 +228,9 @@
                                 </svg>
                                 Trend Absensi Harian
                             </h3>
-                            <div id="attendance-trend-chart" class="h-80 transition-opacity duration-300"></div>
+                            <div class="h-80 transition-opacity duration-300">
+                                <canvas id="attendance-trend-chart"></canvas>
+                            </div>
                         </div>
                     </div>
 
@@ -244,7 +246,9 @@
                                 </svg>
                                 Distribusi Mingguan
                             </h3>
-                            <div id="weekly-distribution-chart" class="h-[400px]"></div>
+                            <div class="h-[400px]">
+                                <canvas id="weekly-distribution-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -355,85 +359,147 @@
         @push('scripts')
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Initialize Charts
-                    initializeAttendanceTrendChart();
-                    initializeWeeklyDistributionChart();
+                let attendanceTrendChart;
+                let weeklyDistributionChart;
 
-                    // Setup refresh functionality
-                    document.getElementById('refresh-data').addEventListener('click', refreshDashboard);
+                document.addEventListener('DOMContentLoaded', function() {
+                    try {
+                        // Initialize Charts
+                        attendanceTrendChart = initializeAttendanceTrendChart();
+                        weeklyDistributionChart = initializeWeeklyDistributionChart();
+
+                        // Setup refresh functionality
+                        document.getElementById('refresh-data').addEventListener('click', refreshDashboard);
+                    } catch (error) {
+                        console.error('Error initializing dashboard:', error);
+                    }
                 });
 
                 function initializeAttendanceTrendChart() {
-                    const ctx = document.getElementById('attendance-trend-chart').getContext('2d');
-                    const trendData = @json($attendanceTrend);
+                    try {
+                        const ctx = document.getElementById('attendance-trend-chart');
+                        if (!ctx) {
+                            console.error('Attendance trend chart canvas not found');
+                            return null;
+                        }
 
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: trendData.map(item => item.date),
-                            datasets: [{
-                                label: 'Jumlah Kehadiran',
-                                data: trendData.map(item => item.count),
-                                borderColor: 'rgb(59, 130, 246)',
-                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                                tension: 0.1,
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
+                        const trendData = @json($attendanceTrend);
+                        console.log('Attendance trend data:', trendData);
+
+                        return new Chart(ctx.getContext('2d'), {
+                            type: 'line',
+                            data: {
+                                labels: trendData.map(item => item.label || item.date),
+                                datasets: [{
+                                    label: 'Jumlah Kehadiran',
+                                    data: trendData.map(item => item.count),
+                                    borderColor: 'rgb(59, 130, 246)',
+                                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                    tension: 0.1,
+                                    fill: true
+                                }]
                             },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    } catch (error) {
+                        console.error('Error initializing attendance trend chart:', error);
+                        return null;
+                    }
                 }
 
                 function initializeWeeklyDistributionChart() {
-                    const ctx = document.getElementById('weekly-distribution-chart').getContext('2d');
-                    const weeklyData = @json($weeklyDistribution);
+                    try {
+                        const ctx = document.getElementById('weekly-distribution-chart');
+                        if (!ctx) {
+                            console.error('Weekly distribution chart canvas not found');
+                            return null;
+                        }
 
-                    new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: weeklyData.map(item => item.day),
-                            datasets: [{
-                                data: weeklyData.map(item => item.count),
-                                backgroundColor: [
-                                    'rgba(239, 68, 68, 0.8)', // Monday - Red
-                                    'rgba(245, 158, 11, 0.8)', // Tuesday - Orange
-                                    'rgba(34, 197, 94, 0.8)', // Wednesday - Green
-                                    'rgba(59, 130, 246, 0.8)', // Thursday - Blue
-                                    'rgba(147, 51, 234, 0.8)', // Friday - Purple
-                                    'rgba(236, 72, 153, 0.8)', // Saturday - Pink
-                                    'rgba(107, 114, 128, 0.8)' // Sunday - Gray
-                                ],
-                                borderWidth: 2,
-                                borderColor: '#fff'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: 'bottom'
+                        const weeklyData = @json($weeklyDistribution);
+                        console.log('Weekly distribution data:', weeklyData);
+
+                        return new Chart(ctx.getContext('2d'), {
+                            type: 'bar',
+                            data: {
+                                labels: weeklyData.map(item => item.label || item.week),
+                                datasets: [{
+                                    label: 'Jumlah Kehadiran',
+                                    data: weeklyData.map(item => item.count),
+                                    backgroundColor: [
+                                        'rgba(59, 130, 246, 0.8)',   // Blue
+                                        'rgba(34, 197, 94, 0.8)',    // Green
+                                        'rgba(245, 158, 11, 0.8)',   // Orange
+                                        'rgba(147, 51, 234, 0.8)'    // Purple
+                                    ],
+                                    borderColor: [
+                                        'rgb(59, 130, 246)',
+                                        'rgb(34, 197, 94)',
+                                        'rgb(245, 158, 11)',
+                                        'rgb(147, 51, 234)'
+                                    ],
+                                    borderWidth: 2,
+                                    borderRadius: 6,
+                                    borderSkipped: false,
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y', // This makes it horizontal
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return context.parsed.x + ' kehadiran';
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1
+                                        },
+                                        grid: {
+                                            color: 'rgba(0, 0, 0, 0.1)'
+                                        }
+                                    },
+                                    y: {
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                },
+                                animation: {
+                                    duration: 1000,
+                                    easing: 'easeInOutQuart'
                                 }
                             }
-                        }
-                    });
+                        });
+                    } catch (error) {
+                        console.error('Error initializing weekly distribution chart:', error);
+                        return null;
+                    }
                 }
 
                 function refreshDashboard() {
@@ -458,6 +524,20 @@
                             document.getElementById('total-absensi').textContent = data.totalAbsensi;
                             document.getElementById('rata-rata-kehadiran').textContent = data.rataRataKehadiran + '%';
                             document.getElementById('absensi-hari-ini').textContent = data.absensiHariIni;
+
+                            // Update attendance trend chart
+                            if (attendanceTrendChart && data.attendanceTrend) {
+                                attendanceTrendChart.data.labels = data.attendanceTrend.map(item => item.label || item.date);
+                                attendanceTrendChart.data.datasets[0].data = data.attendanceTrend.map(item => item.count);
+                                attendanceTrendChart.update();
+                            }
+
+                            // Update weekly distribution chart
+                            if (weeklyDistributionChart && data.weeklyDistribution) {
+                                weeklyDistributionChart.data.labels = data.weeklyDistribution.map(item => item.label || item.week);
+                                weeklyDistributionChart.data.datasets[0].data = data.weeklyDistribution.map(item => item.count);
+                                weeklyDistributionChart.update();
+                            }
 
                             // Update top students list
                             const topStudentsList = document.getElementById('top-students-list');

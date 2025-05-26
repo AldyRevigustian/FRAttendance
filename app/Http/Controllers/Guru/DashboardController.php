@@ -96,6 +96,7 @@ class DashboardController extends Controller
                 ->count();
 
             $weeklyAttendance[] = [
+                'label' => 'Minggu ' . ($week + 1),
                 'week' => 'Week ' . ($week + 1),
                 'count' => $count
             ];
@@ -248,8 +249,50 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        // Average daily attendance calculation
+        // Attendance trend for the date range
+        $absensiTrend = [];
         $dateRange = min($endDate->diffInDays($startDate) + 1, 30);
+
+        for ($i = $dateRange - 1; $i >= 0; $i--) {
+            $date = clone $endDate;
+            $date = $date->subDays($i);
+
+            $count = Absensi::where('kelas_id', $kelas_terpilih)
+                ->whereDate('tanggal', $date)
+                ->count();
+
+            $absensiTrend[] = [
+                'date' => $date->format('Y-m-d'),
+                'label' => $date->format('d M'),
+                'count' => $count
+            ];
+        }
+
+        // Weekly attendance distribution for current month
+        $weeklyAttendance = [];
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        for ($week = 0; $week < 4; $week++) {
+            $weekStart = $startOfMonth->copy()->addWeeks($week);
+            $weekEnd = $weekStart->copy()->addDays(6);
+
+            if ($weekEnd->gt($endOfMonth)) {
+                $weekEnd = $endOfMonth;
+            }
+
+            $count = Absensi::where('kelas_id', $kelas_terpilih)
+                ->whereBetween('tanggal', [$weekStart, $weekEnd])
+                ->count();
+
+            $weeklyAttendance[] = [
+                'label' => 'Minggu ' . ($week + 1),
+                'week' => 'Week ' . ($week + 1),
+                'count' => $count
+            ];
+        }
+
+        // Average daily attendance calculation
         $avgDailyAttendance = $dateRange > 0 ? round($totalAbsensiPeriode / $dateRange, 1) : 0;
 
         return response()->json([
@@ -269,6 +312,8 @@ class DashboardController extends Controller
                     'siswa' => $absensi->siswa->nama,
                 ];
             }),
+            'attendanceTrend' => $absensiTrend,
+            'weeklyDistribution' => $weeklyAttendance,
         ]);
     }
 }
