@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('guru.dashboard')" :active="request()->routeIs('guru.dashboard')">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('guru.dashboard', ['kelas_terpilih' => session('kelas_aktif')])" :active="request()->routeIs('guru.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('guru.siswa', ['kelas_terpilih' => session('kelas_aktif')])" :active="request()->routeIs('guru.siswa*')">
                         {{ __('Siswa') }}
