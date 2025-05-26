@@ -31,7 +31,6 @@
                             <input type="hidden" name="kelas_id" value="{{ $absensi->kelas_id }}">
                         </div>
 
-                        <!-- Tanggal (editable) -->
                         <div class="mb-6">
                             <label for="tanggal"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tanggal</label>
@@ -43,7 +42,6 @@
                             @enderror
                         </div>
 
-                        <!-- Waktu Masuk (editable) -->
                         <div class="mb-6">
                             <label for="waktu_masuk"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Waktu Masuk</label>
@@ -55,7 +53,6 @@
                             @enderror
                         </div>
 
-                        <!-- Waktu Keluar (editable) -->
                         <div class="mb-6">
                             <label for="waktu_keluar"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Waktu Keluar</label>

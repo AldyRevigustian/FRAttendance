@@ -12,7 +12,6 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Class Info Card -->
             @if ($selectedKelas)
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg mb-6 border-t-4 border-blue-600">
@@ -54,7 +53,6 @@
                     </div>
                 </div>
 
-                <!-- Filter Controls -->
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg mb-6 border-t-4 border-indigo-600">
                     <div class="p-6">
@@ -117,9 +115,7 @@
                     </div>
                 </div>
 
-                <!-- Stats Overview -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <!-- Total Students in Class -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                         <div class="p-6 border-l-4 border-blue-500">
@@ -142,7 +138,6 @@
                         </div>
                     </div>
 
-                    <!-- Total Attendance Records -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                         <div class="p-6 border-l-4 border-green-500">
@@ -166,7 +161,6 @@
                         </div>
                     </div>
 
-                    <!-- Average Attendance Rate -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                         <div class="p-6 border-l-4 border-yellow-500">
@@ -190,7 +184,6 @@
                         </div>
                     </div>
 
-                    <!-- Today's Attendance -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                         <div class="p-6 border-l-4 border-red-500">
@@ -215,9 +208,7 @@
                     </div>
                 </div>
 
-                <!-- Charts Row -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <!-- Attendance Trend Chart -->
                     <div
                         class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
                         <div class="p-6 pb-20 border-t-4 border-indigo-500">
@@ -235,7 +226,6 @@
                         </div>
                     </div>
 
-                    <!-- Weekly Distribution Chart -->
                     <div
                         class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
                         <div class="p-6 border-t-4 border-purple-500">
@@ -254,9 +244,7 @@
                     </div>
                 </div>
 
-                <!-- Student Rankings and Recent Attendance -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <!-- Top Students by Attendance -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg border-t-4 border-green-500">
                         <div class="p-6">
@@ -293,7 +281,6 @@
                         </div>
                     </div>
 
-                    <!-- Recent Attendance Records -->
                     <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg border-t-4 border-blue-500">
                         <div class="p-6">

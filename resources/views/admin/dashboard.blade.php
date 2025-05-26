@@ -7,7 +7,6 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Filter Controls -->
             <div
                 class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg mb-6 border-t-4 border-indigo-600">
                 <div class="p-6">
@@ -84,9 +83,7 @@
                 </div>
             </div>
 
-            <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <!-- Total Students Card -->
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-indigo-500">
@@ -108,7 +105,6 @@
                     </div>
                 </div>
 
-                <!-- Total Teachers Card -->
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-green-500">
@@ -130,7 +126,6 @@
                     </div>
                 </div>
 
-                <!-- Total Classes Card -->
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-yellow-500">
@@ -152,7 +147,6 @@
                     </div>
                 </div>
 
-                <!-- Today's Attendance Card -->
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg sm:rounded-lg transition-all duration-300 transform hover:-translate-y-1">
                     <div class="p-6 border-l-4 border-red-500">
@@ -176,9 +170,7 @@
                 </div>
             </div>
 
-            <!-- Charts and Tables Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <!-- Attendance Trend Chart -->
                 <div
                     class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
                     <div class="p-6 pb-20 border-t-4 border-indigo-500">
@@ -245,7 +237,6 @@
                 </div>
             </div>
 
-            <!-- Recent Attendance Table -->
             <div
                 class="bg-white dark:bg-gray-800 overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg mb-6 border-t-4 border-green-500">
                 <div class="p-6">

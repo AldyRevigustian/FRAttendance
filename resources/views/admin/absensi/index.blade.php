@@ -15,7 +15,6 @@
                             Tambah Absensi
                         </a>
 
-                        <!-- Date and Class Filter Form -->
                         <form method="GET" action="{{ route('admin.absensi') }}" class="flex items-center space-x-3">
                             <div class="flex items-center space-x-2">
                                 <label for="start_date"
@@ -74,7 +73,6 @@
                         </div>
                     @endif
 
-                    <!-- Absensi Table -->
                     <table id="absensiTable" class="stripe w-full">
                         <thead>
                             <tr>
