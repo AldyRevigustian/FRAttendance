@@ -275,7 +275,7 @@
                 </svg>
             </div>
             <h2>Portal Guru</h2>
-            <p>Akses semua perangkat dan sumber daya mengajar Anda di satu tempat.</p>
+            <p>Kelola absensi siswa dengan teknologi face recognition dan pantau kehadiran kelas secara real-time.</p>
         </div>
         <div class="login-form-container">
             <h1>Login Guru</h1>

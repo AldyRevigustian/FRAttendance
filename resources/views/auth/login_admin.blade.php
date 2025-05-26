@@ -246,7 +246,7 @@
                 </svg>
             </div>
             <h2>Portal Admin</h2>
-            <p>Kelola sistem pembelajaran dan administrasi sekolah dengan kontrol penuh.</p>
+            <p>Kelola sistem absensi face recognition, data siswa, guru, dan kelas dalam satu platform terpadu.</p>
         </div>
         <div class="login-form-container">
             <h1>Login Admin</h1>
