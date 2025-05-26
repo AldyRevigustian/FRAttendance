@@ -296,7 +296,7 @@
                     <label for="kelas_id">{{ __('Pilih Kelas') }}</label>
                     <div class="flex">
                         <select name="kelas_id" id="kelas_id">
-                            <option value="" disabled selected style="color: #929292;">-- Refresh untuk memuat kelas --
+                            <option value="" disabled selected style="color: #929292;">-- Refresh kelas --
                             </option>
                         </select>
                         <button type="button" id="refresh-kelas" class="refresh-btn">
