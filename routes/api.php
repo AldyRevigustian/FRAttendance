@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\GuruAuthController;
 use App\Http\Controllers\Api\GuruController;
 use App\Http\Controllers\Api\ModelDownloadController;
+use App\Http\Controllers\Api\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum'])->prefix('guru')->group(function () {
     Route::get('/kelas', [GuruController::class, 'kelas'])->name('guru.kelas');
 });
+
+Route::get('/siswa/{id}', [SiswaController::class, 'show']);
+Route::post('/siswa/create', [SiswaController::class, 'store']);
+Route::get('/siswa/profile/{id}', [SiswaController::class, 'profile']);
+
+
 Route::post('/guru/login', [GuruAuthController::class, 'login']);
 
 Route::get('/models/list', [ModelDownloadController::class, 'getModelList']);
