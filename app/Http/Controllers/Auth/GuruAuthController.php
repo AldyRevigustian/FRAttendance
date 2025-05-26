@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kelas;
 
 class GuruAuthController extends Controller
 {
@@ -18,15 +19,36 @@ class GuruAuthController extends Controller
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            'kelas_id' => ['required', 'exists:kelas,id'],
         ]);
 
-        if (Auth::guard('guru')->attempt($credentials)) {
+        if (Auth::guard('guru')->attempt([
+            'email' => $credentials['email'],
+            'password' => $credentials['password'],
+        ])) {
             $request->session()->regenerate();
-            return redirect()->route('guru.dashboard');
+
+            $guru = Auth::guard('guru')->user();
+
+            // Validasi kelas dimiliki oleh guru
+            $kelas = Kelas::where('id', $credentials['kelas_id'])
+                ->where('guru_id', $guru->id)
+                ->first();
+
+            if (!$kelas) {
+                Auth::guard('guru')->logout();
+                return back()->withErrors([
+                    'kelas_id' => 'Kelas yang dipilih tidak valid untuk akun ini.',
+                ]);
+            }
+
+            session(['kelas_aktif' => $kelas->id]);
+
+            return redirect()->route('guru.dashboard', ['kelas_terpilih' => $kelas->id]);
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email atau password salah.',
         ]);
     }
 

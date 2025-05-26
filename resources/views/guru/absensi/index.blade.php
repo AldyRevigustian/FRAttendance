@@ -2,7 +2,7 @@
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('Daftar Absensi') }}
+        {{ __('Daftar Absensi') }} {{ $kelas->nama }}
     </h2>
 @endsection
 
@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('admin.absensi_create') }}"
+                    <a href="{{ route('guru.absensi_create', ['kelas_terpilih' => session('kelas_aktif')]) }}"
                         class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none">
                         Tambah Absensi
                     </a>
@@ -62,7 +62,7 @@
                                         </label>
                                     </td>
                                     <td class="flex space-x-2">
-                                        <a href="{{ route('admin.absensi_edit', $absensi->id) }}"
+                                        <a href="{{ route('guru.absensi_edit', ['kelas_terpilih' => session('kelas_aktif'), 'id' => $absensi->id]) }}"
                                             class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">
                                             <span class="sr-only">Edit Anggota</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -74,8 +74,9 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </a>
-                                        <form action="{{ route('admin.absensi_destroy', $absensi->id) }}" method="POST"
-                                            style="display:inline;">
+                                        <form
+                                            action="{{ route('guru.absensi_destroy', ['kelas_terpilih' => session('kelas_aktif'), 'id' => $absensi->id]) }}"
+                                            method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

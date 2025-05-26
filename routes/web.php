@@ -1,14 +1,8 @@
 <?php
 
-use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\GuruAuthController;
-use App\Http\Controllers\KelasController;
-use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -84,25 +78,23 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
 });
 
 Route::prefix('guru')->middleware(['guru'])->group(function () {
-    Route::get('/dashboard', function () {
-        return "HALLo";
-    })->name('guru.dashboard');
+    Route::prefix('{kelas_terpilih}')->middleware(['kelas.aktif'])->group(function () {
 
-    Route::get('/', function () {
-        return redirect()->route('guru.dashboard');
+        Route::get('/dashboard', function ($kelas_terpilih) {
+            return "Dashboard Guru untuk kelas ID: $kelas_terpilih";
+        })->name('guru.dashboard');
+
+        Route::prefix('absensi')->controller(App\Http\Controllers\Guru\AbsensiController::class)->group(function () {
+            Route::get('/', 'index')->name('guru.absensi');
+            Route::get('/create', 'create')->name('guru.absensi_create');
+            Route::post('/create/store', 'store')->name('guru.absensi_store');
+
+            Route::get('/edit/{id}', 'edit')->name('guru.absensi_edit');
+            Route::put('/update/{id}', 'update')->name('guru.absensi_update');
+
+            Route::delete('/{id}', 'destroy')->name('guru.absensi_destroy');
+        });
     });
-
-    Route::prefix('absensi')->controller(App\Http\Controllers\Guru\AbsensiController::class)->group(function () {
-        Route::get('/', 'index')->name('guru.absensi');
-        Route::get('/create', 'create')->name('guru.absensi_create');
-        Route::post('/create/store', 'store')->name('guru.absensi_store');
-
-        Route::get('/edit/{id}', 'edit')->name('guru.absensi_edit');
-        Route::put('/update/{id}', 'update')->name('guru.absensi_update');
-
-        Route::delete('/{id}', 'destroy')->name('guru.absensi_destroy');
-    });
-
     Route::post('logout', [GuruAuthController::class, 'logout'])
         ->name('guru.logout');
 });

@@ -11,22 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller
 {
-    public function index()
+    public function index($kelas_terpilih)
     {
-        $guru = Auth::guard('guru')->user();
-        $absensis = Absensi::with(['siswa', 'kelas'])->where('kelas_id', $guru->kelas)->get();
-        return view('guru.absensi.index', compact('absensis'));
+        $kelas = Kelas::findOrFail($kelas_terpilih);
+        $absensis = Absensi::with(['siswa', 'kelas'])->where('kelas_id', $kelas_terpilih)->get();
+        return view('guru.absensi.index', compact('absensis', 'kelas'));
     }
 
-    public function create()
+    public function create($kelas_terpilih)
     {
-        $siswas = Siswa::all();
+        $nama_kelas = Kelas::findOrFail($kelas_terpilih)->nama;
+        $siswas = Siswa::where('kelas_id', $kelas_terpilih)->get();
         $kelas = Kelas::all();
-        return view('guru.absensi.create', compact('siswas', 'kelas'));
+        return view('guru.absensi.create', compact('siswas', 'kelas', 'nama_kelas'));
     }
 
-
-    public function store(Request $request)
+    public function store(Request $request, $kelas_terpilih)
     {
         $request->validate([
             'siswa_id' => 'required|exists:siswas,id',
@@ -49,21 +49,23 @@ class AbsensiController extends Controller
         ]);
 
         if ($absensi) {
-            return redirect()->route('guru.absensi')->with('success', 'Absensi berhasil ditambahkan');
+            return redirect()->route('guru.absensi', ['kelas_terpilih' => $kelas_terpilih])
+                ->with('success', 'Absensi berhasil ditambahkan');
         }
 
-        return redirect()->route('guru.absensi')->with('failed', 'Absensi gagal ditambahkan');
+        return redirect()->route('guru.absensi', ['kelas_terpilih' => $kelas_terpilih])
+            ->with('failed', 'Absensi gagal ditambahkan');
     }
 
-    public function edit($id)
+    public function edit($kelas_terpilih, $id)
     {
         $absensi = Absensi::findOrFail($id);
-        $siswas = Siswa::all();
-        $kelas = Kelas::all();
+        $siswas = Siswa::where('kelas_id', $kelas_terpilih)->get();
+        $kelas = Kelas::where('id', $kelas_terpilih)->first();
         return view('guru.absensi.edit', compact('absensi', 'siswas', 'kelas'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $kelas_terpilih, $id)
     {
         $request->validate([
             'tanggal' => 'required|date',
@@ -83,16 +85,14 @@ class AbsensiController extends Controller
             'waktu_keluar' => $request->waktu_keluar,
         ]);
 
-        return redirect()->route('guru.absensi')->with('success', 'Absensi berhasil diperbarui');
+        return redirect()->route('guru.absensi',  ['kelas_terpilih' => $kelas_terpilih])->with('success', 'Absensi berhasil diperbarui');
     }
 
-
-
-    public function destroy($id)
+    public function destroy($kelas_terpilih, $id)
     {
         $absensi = Absensi::findOrFail($id);
         $absensi->delete();
 
-        return redirect()->route('guru.absensi')->with('success', 'Absensi berhasil dihapus');
+        return redirect()->route('guru.absensi',  ['kelas_terpilih' => $kelas_terpilih])->with('success', 'Absensi berhasil dihapus');
     }
 }

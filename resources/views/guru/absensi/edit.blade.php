@@ -1,11 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Absensi') }}
-        </h2>
-    </x-slot>
+@extends('layouts.guru')
 
-    <form action="{{ route('admin.absensi_update', $absensi->id) }}" method="POST">
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        {{ __('Edit Absensi') }} {{ $kelas->nama }}
+    </h2>
+@endsection
+
+@section('content')
+    <form action="{{ route('guru.absensi_update', ['kelas_terpilih' => session('kelas_aktif'), 'id' => $absensi->id]) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -14,8 +16,8 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="mb-6">
-                            <label for="siswa_nama"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Nama Siswa</label>
+                            <label for="siswa_nama" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Nama
+                                Siswa</label>
                             <input type="text" id="siswa_nama" disabled
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-300"
                                 value="{{ $absensi->siswa->nama ?? '' }}">
@@ -31,7 +33,6 @@
                             <input type="hidden" name="kelas_id" value="{{ $absensi->kelas_id }}">
                         </div>
 
-                        <!-- Tanggal (editable) -->
                         <div class="mb-6">
                             <label for="tanggal"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tanggal</label>
@@ -43,7 +44,6 @@
                             @enderror
                         </div>
 
-                        <!-- Waktu Masuk (editable) -->
                         <div class="mb-6">
                             <label for="waktu_masuk"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Waktu Masuk</label>
@@ -55,7 +55,6 @@
                             @enderror
                         </div>
 
-                        <!-- Waktu Keluar (editable) -->
                         <div class="mb-6">
                             <label for="waktu_keluar"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Waktu Keluar</label>
@@ -76,4 +75,4 @@
             </div>
         </div>
     </form>
-</x-app-layout>
+@endsection

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\GuruAuthController;
 use App\Http\Controllers\Api\GuruController;
 use App\Http\Controllers\Api\ModelDownloadController;
 use App\Http\Controllers\Api\SiswaController;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,21 @@ Route::post('/guru/login', [GuruAuthController::class, 'login']);
 Route::get('/models/list', [ModelDownloadController::class, 'getModelList']);
 Route::get('/models/download/{filename}', [ModelDownloadController::class, 'downloadModel']);
 Route::get('/models/download-all', [ModelDownloadController::class, 'downloadAllModels']);
+
+Route::get('/kelas-by-email', function (\Illuminate\Http\Request $request) {
+    $email = $request->query('email');
+
+    if (!$email) {
+        return response()->json([], 400);
+    }
+
+    $guru = \App\Models\Guru::where('email', $email)->first();
+
+    if (!$guru) {
+        return response()->json([]);
+    }
+
+    $kelas = Kelas::where('guru_id', $guru->id)->get(['id', 'nama']);
+
+    return response()->json($kelas);
+});
