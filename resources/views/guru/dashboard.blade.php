@@ -151,7 +151,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     <div
                         class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
-                        <div class="p-6 border-t-4 border-indigo-500">
+                        <div class="p-6 pb-20 border-t-4 border-indigo-500">
                             <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center">
                                 <svg class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -161,44 +161,34 @@
                                 Trend Absensi Harian
                             </h3>
 
-                            <!-- Filter Form -->
-                            <div class="mb-6">
-                                <form id="dashboard-filter"
+                            <!-- Filter Periode untuk Chart -->
+                            <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border">
+                                <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
+                                    <svg class="h-4 w-4 text-indigo-600 mr-2" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                                    </svg>
+                                    Filter Periode Chart
+                                </h4>
+                                <form id="chart-filter"
                                     action="{{ route('guru.dashboard', ['kelas_terpilih' => $selectedKelas->id]) }}" method="GET"
                                     class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="group">
                                         <label for="start_date"
-                                            class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">Tanggal
+                                            class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tanggal
                                             Mulai</label>
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-4 w-4 text-gray-400 group-hover:text-indigo-500" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                            <input type="date" id="start_date" name="start_date"
-                                                value="{{ request('start_date', $startDate->format('Y-m-d')) }}"
-                                                class="pl-9 block w-full text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition-all duration-200">
-                                        </div>
+                                        <input type="date" id="start_date" name="start_date"
+                                            value="{{ request('start_date', $startDate->format('Y-m-d')) }}"
+                                            class="block w-full text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </div>
                                     <div class="group">
                                         <label for="end_date"
-                                            class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">Tanggal
+                                            class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Tanggal
                                             Akhir</label>
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <svg class="h-4 w-4 text-gray-400 group-hover:text-indigo-500" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                            <input type="date" id="end_date" name="end_date"
-                                                value="{{ request('end_date', $endDate->format('Y-m-d')) }}"
-                                                class="pl-9 block w-full text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition-all duration-200">
-                                        </div>
+                                        <input type="date" id="end_date" name="end_date"
+                                            value="{{ request('end_date', $endDate->format('Y-m-d')) }}"
+                                            class="block w-full text-sm rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </div>
                                     <div class="flex items-end">
                                         <button type="submit"
@@ -247,7 +237,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12l2 2 4-4M7 12a5 5 0 1010 0 5 5 0 00-10 0z" />
                                 </svg>
-                                Siswa Terajin
+                                Siswa Terajin Bulan Ini
                             </h3>
                             <div class="space-y-3" id="top-students-list">
                                 @foreach ($topStudents as $index => $student)
