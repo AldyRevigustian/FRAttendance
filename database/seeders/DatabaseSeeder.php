@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         Guru::create([
             'kode' => 'GR001',
             'nama' => 'Guru Test',
-            'email' => 'guru.test@guru.com',
+            'email' => 'guru@edu.co.id',
             'jenis_kelamin' => 0,
             'password' => Hash::make("guru"),
         ]);
@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
                 $ct++;
             }
         }
-
 
         Siswa::create([
             'id' => 2702303633,
