@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\GuruAuthController;
 use App\Http\Controllers\Api\GuruController;
+use App\Http\Controllers\Api\ModelDownloadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,7 @@ Route::middleware(['auth:sanctum'])->prefix('guru')->group(function () {
     Route::get('/kelas', [GuruController::class, 'kelas'])->name('guru.kelas');
 });
 Route::post('/guru/login', [GuruAuthController::class, 'login']);
+
+Route::get('/models/list', [ModelDownloadController::class, 'getModelList']);
+Route::get('/models/download/{filename}', [ModelDownloadController::class, 'downloadModel']);
+Route::get('/models/download-all', [ModelDownloadController::class, 'downloadAllModels']);
