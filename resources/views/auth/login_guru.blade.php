@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('dosen.login.auth') }}">
+    <form method="POST" action="{{ route('guru.login.auth') }}">
         @csrf
         <div>
             <x-input-label for="email" :value="__('Email')" />

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mahasiswa;
+use App\Models\Siswa;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class MahasiswaController extends Controller
+class SiswaController extends Controller
 {
     public function verify(Request $request)
     {
@@ -34,35 +34,56 @@ class MahasiswaController extends Controller
         return response()->json($result);
     }
 
-
     public function index()
     {
-        $mahasiswas = Mahasiswa::with('kelas')->get();
-        return view('admin.mahasiswa.index', compact('mahasiswas'));
+        $siswas = Siswa::with('kelas')->get();
+        return view('admin.siswa.index', compact('siswas'));
     }
 
     public function create()
     {
         $kelas = Kelas::all();
-        return view('admin.mahasiswa.create', compact('kelas'));
+        return view('admin.siswa.create', compact('kelas'));
+    }
+
+    public function train()
+    {
+        $pythonScript1 = base_path('scripts/augmentasi.py');
+        $pythonScript2 = base_path('scripts/train.py');
+
+        $command1 = "python $pythonScript1";
+        $command2 = "python $pythonScript2";
+
+        exec($command1, $output1, $status1);
+        exec($command2, $output2, $status2);
+
+        if ($status1 === 0 && $status2 === 0) {
+            Siswa::query()->update(['is_trained' => 1]);
+            return redirect()->route('admin.siswa')->with('success', 'Training Siswa berhasil ');
+        } else {
+            return redirect()->route('admin.siswa')->with('error', 'Terjadi kesalahan saat Training');
+        }
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nim' => 'required|string|max:255|unique:mahasiswas,id',
+            'nis' => 'required|string|max:255|unique:siswas,id',
             'nama' => 'required|string|max:255',
             'kelas_id' => 'required|exists:kelas,id',
             'photos' => 'required|array|min:5',
+            'jenis_kelamin' => 'required|in:0,1',
+
         ]);
 
-        $mahasiswa = Mahasiswa::create([
-            'id' => $request->nim,
+        $siswa = Siswa::create([
+            'id' => $request->nis,
             'nama' => $request->nama,
             'kelas_id' => $request->kelas_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        $folderPath = base_path("scripts/Images/{$mahasiswa->id}");
+        $folderPath = base_path("scripts/Images/{$siswa->id}");
         if (!file_exists($folderPath)) {
             mkdir($folderPath, 0755, true);
         }
@@ -74,20 +95,39 @@ class MahasiswaController extends Controller
         }
 
 
-        return redirect()->route('admin.mahasiswa')->with('success', 'Mahasiswa berhasil ditambahkan');
+        return redirect()->route('admin.siswa')->with('success', 'Siswa berhasil ditambahkan');
     }
+    public function update(Request $request, $id)
+    {
+        $siswa = Siswa::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kelas_id' => 'required|exists:kelas,id',
+            'jenis_kelamin' => 'required|in:0,1',
+        ]);
+
+        $siswa->update([
+            'nama' => $request->nama,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'kelas_id' => $request->kelas_id,
+        ]);
+
+        return redirect()->route('admin.siswa')->with('success', 'Data siswa berhasil diperbarui.');
+    }
+
 
     public function edit($id)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
+        $siswa = Siswa::findOrFail($id);
         $kelas = Kelas::all();
 
-        return view('admin.mahasiswa.edit', compact('mahasiswa', 'kelas'));
+        return view('admin.siswa.edit', compact('siswa', 'kelas'));
     }
 
     public function destroy($id)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
+        $siswa = Siswa::findOrFail($id);
 
         $path = base_path("scripts/Images/{$id}/");
         $path2 = base_path("scripts/Images/Augmented_Images/{$id}/");
@@ -99,8 +139,8 @@ class MahasiswaController extends Controller
         if (File::exists($path2) && File::isDirectory($path2)) {
             File::deleteDirectory($path2);
         }
-        $mahasiswa->delete();
+        $siswa->delete();
 
-        return redirect()->route('admin.mahasiswa')->with('success', 'Mahasiswa berhasil dihapus');
+        return redirect()->route('admin.siswa')->with('success', 'Siswa berhasil dihapus');
     }
 }

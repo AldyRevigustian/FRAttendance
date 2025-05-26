@@ -11,12 +11,17 @@ class Kelas extends Model
 
     protected $fillable = [
         'id',
+        'guru_id',
         'nama'
     ];
 
-    public function mahasiswas()
+    public function guru(){
+        return $this->belongsTo(Guru::class);
+    }
+
+    public function siswas()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Siswa::class);
     }
 
     public function absensies()

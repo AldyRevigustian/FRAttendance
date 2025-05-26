@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\DosenAuthController;
+use App\Http\Controllers\Api\GuruAuthController;
+use App\Http\Controllers\Api\GuruController;
+use App\Http\Controllers\Api\ModelDownloadController;
+use App\Http\Controllers\Api\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->prefix('dosen')->group(function () {
-        
-        // Route::post('/logout', [DosenAuthController::class, 'logout'])->name('logout');
-        // Route::get('/dashboard', [DosenAuthController::class, 'dashboard'])->name('dashboard');
-    });
-Route::post('/dosen/login', [DosenAuthController::class, 'login']);
+Route::middleware(['auth:sanctum'])->prefix('guru')->group(function () {
+    Route::get('/kelas', [GuruController::class, 'kelas'])->name('guru.kelas');
+});
+
+Route::get('/siswa/{id}', [SiswaController::class, 'show']);
+Route::post('/siswa/create', [SiswaController::class, 'store']);
+Route::get('/siswa/profile/{id}', [SiswaController::class, 'profile']);
+
+
+Route::post('/guru/login', [GuruAuthController::class, 'login']);
+
+Route::get('/models/list', [ModelDownloadController::class, 'getModelList']);
+Route::get('/models/download/{filename}', [ModelDownloadController::class, 'downloadModel']);
+Route::get('/models/download-all', [ModelDownloadController::class, 'downloadAllModels']);

@@ -14,11 +14,11 @@ return [
         ],
         'api' => [
             'driver' => 'sanctum',
-            'provider' => 'dosens',
+            'provider' => 'gurus',
         ],
-        'dosen' => [
+        'guru' => [
             'driver' => 'session',
-            'provider' => 'dosens',
+            'provider' => 'gurus',
         ],
     ],
 
@@ -28,9 +28,9 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        'dosens' => [
+        'gurus' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Dosen::class,
+            'model' => App\Models\Guru::class,
         ],
     ],
 

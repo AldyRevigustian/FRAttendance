@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
                 if ($request->is('admin*')) {
                     return redirect()->route('admin.dashboard');
                 } else {
-                    return redirect()->route('dosen.dashboard');
+                    return redirect()->route('guru.dashboard');
                 }
             }
         }

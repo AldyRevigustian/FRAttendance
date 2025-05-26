@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tambah Mahasiswa') }}
+            {{ __('Tambah Siswa') }}
         </h2>
     </x-slot>
 
@@ -9,24 +9,49 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('admin.mahasiswa_store') }}" method="POST">
+                    <form action="{{ route('admin.siswa_store') }}" method="POST">
                         @csrf
 
                         <div class="mb-6">
-                            <label for="nim"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">NIM</label>
-                            <input type="text" name="nim" id="nim"
+                            <label for="nis"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">NIS</label>
+                            <input type="text" name="nis" id="nis" placeholder="Masukkan NIS"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('nis')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
                             <label for="nama"
                                 class="block text-sm font-medium text-gray-700 dark:text-gray-200">Nama</label>
-                            <input type="text" name="nama" id="nama"
+                            <input type="text" name="nama" id="nama" placeholder="Masukkan Nama"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                            @error('nama')
+                                <span class="text-red-500 text-sm" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
+
+                        <div class="mb-6">
+                            <label for="jenis_kelamin"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-200">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                required>
+                                <option value="" selected disabled>-- Jenis Kelamin --</option>
+                                <option value="0">Laki-laki
+                                </option>
+                                <option value="1">Perempuan
+                                </option>
+                            </select>
+                        </div>
+
 
                         <div class="mb-6">
                             <label for="kelas_id"
@@ -34,6 +59,7 @@
                             <select name="kelas_id" id="kelas_id"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                                 required>
+                                <option value="" selected disabled>-- Pilih Kelas --</option>
                                 @foreach ($kelas as $kelasItem)
                                     <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama }}</option>
                                 @endforeach
@@ -43,8 +69,7 @@
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Ambil Foto</label>
                             <div class="flex justify-center">
-                                <video id="video" autoplay playsinline
-                                    class="w-full h-60 bg-gray-800 rounded-md mb-4"></video>
+                                <video id="video" autoplay playsinline class="w-full h-60  rounded-md mb-4"></video>
                             </div>
                             <div class="flex justify-center">
                                 <button type="button" id="capture"
@@ -62,7 +87,7 @@
                         </div>
 
                         <button type="submit" id="submit" disabled
-                            class="inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-400 text-black text-sm font-semibold rounded-md focus:outline-none mb-4">
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white text-sm font-semibold rounded-md focus:outline-none">
                             Simpan
                         </button>
 
@@ -142,7 +167,7 @@
             verifyButton.textContent = "Memverifikasi...";
 
             try {
-                const response = await fetch('{{ route('admin.mahasiswa_verify') }}', {
+                const response = await fetch('{{ route('admin.siswa_verify') }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

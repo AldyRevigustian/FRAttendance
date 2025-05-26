@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
@@ -16,24 +17,26 @@ class KelasController extends Controller
 
     public function create()
     {
-        return view('admin.kelas.create');
+        $gurus = Guru::all();
+        return view('admin.kelas.create', compact('gurus'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
+            'guru_id' => 'required|exists:gurus,id',
         ]);
 
         Kelas::create($request->all());
-
         return redirect()->route('admin.kelas')->with('success', 'Kelas berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
+        $gurus = Guru::all();
         $kelas = Kelas::findOrFail($id);
-        return view('admin.kelas.edit', compact('kelas'));
+        return view('admin.kelas.edit', compact('kelas', 'gurus'));
     }
 
     public function update(Request $request, $id)

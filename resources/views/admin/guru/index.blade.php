@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Daftar Absensi') }}
+            {{ __('Daftar Guru') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('admin.absensi_create') }}"
+                    <a href="{{ route('admin.guru_create') }}"
                         class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-md focus:outline-none">
-                        Tambah Absensi
+                        Tambah Guru
                     </a>
 
                     @if (session('success'))
@@ -20,49 +20,27 @@
                         </div>
                     @endif
 
-                    <!-- Absensi Table -->
-                    <table id="absensiTable" class="stripe w-full">
+                    <table id="guruTable" class="stripe w-full">
                         <thead>
                             <tr>
-                                <th class="w-2">No</th>
-                                <th class="w-2">NIS</th>
-                                <th>Nama Siswa</th>
-                                <th class="w-1/12">Kelas</th>
-                                <th class="w-[120px] text-center">Tanggal</th>
-                                <th class="w-1/12 text-center">Masuk</th>
-                                <th class="w-1/12 text-center">Keluar</th>
+                                <th class="w-2">No.</th>
+                                <th class="w-3">Kode</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Jenis - Kelamin</th>
                                 <th class="w-1/12">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($absensis as $key => $absensi)
+                            @foreach ($gurus as $key => $guru)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $absensi->siswa->id }}</td>
-                                    <td>{{ $absensi->siswa->nama }}</td>
-                                    <td>{{ $absensi->kelas->nama }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($absensi->tanggal)->format('d-m-Y') }}</td>
-                                    <td class="text-start align-start">
-                                        <label class="inline-flex items-start space-x-2 cursor-default">
-                                            <input type="checkbox" disabled {{ $absensi->waktu_masuk ? 'checked' : '' }}
-                                                class="w-5 h-5 text-green-600 bg-green-100 border-green-400 rounded focus:ring-green-500 cursor-not-allowed" />
-                                            <span class="text-sm text-gray-700">
-                                                {{ $absensi->waktu_masuk ? \Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i') : '-' }}
-                                            </span>
-                                        </label>
-                                    </td>
-                                    <td class="text-start align-start">
-                                        <label class="inline-flex items-start space-x-2 cursor-default">
-                                            <input type="checkbox" disabled
-                                                {{ $absensi->waktu_keluar ? 'checked' : '' }}
-                                                class="w-5 h-5 text-red-600 bg-red-100 border-red-400 rounded focus:ring-red-500 cursor-not-allowed" />
-                                            <span class="text-sm text-gray-700">
-                                                {{ $absensi->waktu_keluar ? \Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i') : '-' }}
-                                            </span>
-                                        </label>
-                                    </td>
+                                    <td>{{ $guru->kode }}</td>
+                                    <td>{{ $guru->nama }}</td>
+                                    <td>{{ $guru->email }}</td>
+                                    <td>{{ $guru->jenis_kelamin == 0 ? 'Laki - laki' : 'Perempuan' }}</td>
                                     <td class="flex space-x-2">
-                                        <a href="{{ route('admin.absensi_edit', $absensi->id) }}"
+                                        <a href="{{ route('admin.guru_edit', $guru->id) }}"
                                             class="inline-flex items-center justify-center p-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors duration-150">
                                             <span class="sr-only">Edit Anggota</span> <svg
                                                 xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -74,8 +52,8 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </a>
-                                        <form action="{{ route('admin.absensi_destroy', $absensi->id) }}"
-                                            method="POST" style="display:inline;">
+                                        <form action="{{ route('admin.guru_destroy', $guru->id) }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -103,7 +81,7 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#absensiTable').DataTable({
+                $('#guruTable').DataTable({
                     "processing": true,
                     "serverSide": false,
                     "paging": true,

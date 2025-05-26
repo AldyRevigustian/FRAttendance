@@ -8,29 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Absensi extends Model
 {
     use HasFactory;
-
-    public $timestamps = false;
     protected $fillable = [
         'id',
-        'tanggal',
+        'siswa_id',
         'kelas_id',
-        'mata_kuliah_id',
-        'mahasiswa_id'
+        'tanggal',
+        'waktu_masuk',
+        'waktu_keluar',
     ];
 
 
-    public function mahasiswa()
+    public function siswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Siswa::class);
     }
 
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
-    }
-
-    public function mataKuliah()
-    {
-        return $this->belongsTo(MataKuliah::class);
     }
 }

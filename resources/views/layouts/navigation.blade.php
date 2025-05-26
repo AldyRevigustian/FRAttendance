@@ -17,8 +17,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.mahasiswa')" :active="request()->routeIs('admin.mahasiswa*')">
-                        {{ __('Mahasiswa') }}
+                    <x-nav-link :href="route('admin.siswa')" :active="request()->routeIs('admin.siswa*')">
+                        {{ __('Siswa') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.guru')" :active="request()->routeIs('admin.guru*')">
+                        {{ __('Guru') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -28,20 +33,8 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.matakuliah')" :active="request()->routeIs('admin.matakuliah*')">
-                        {{ __('Matakuliah') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('admin.absensi')" :active="request()->routeIs('admin.absensi*')">
                         {{ __('Absensi') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.training')" :active="request()->routeIs('admin.training*')">
-                        {{ __('Training') }}
                     </x-nav-link>
                 </div>
             </div>
