@@ -73,8 +73,11 @@ class DashboardController extends Controller
 
 
         $siswaAbsensiData = Siswa::where('kelas_id', $kelas_terpilih)
-            ->withCount(['absensies' => function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
+            ->withCount(['absensies' => function ($query) {
+                $query->whereBetween('tanggal', [
+                    Carbon::now()->startOfMonth()->startOfDay(),
+                    Carbon::now()->endOfDay()
+                ]);
             }])
             ->orderByDesc('absensies_count')
             ->take(10)
@@ -248,8 +251,11 @@ class DashboardController extends Controller
 
 
         $siswaAbsensiData = Siswa::where('kelas_id', $kelas_terpilih)
-            ->withCount(['absensies' => function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
+            ->withCount(['absensies' => function ($query) {
+                $query->whereBetween('tanggal', [
+                    Carbon::now()->startOfMonth()->startOfDay(),
+                    Carbon::now()->endOfDay()
+                ]);
             }])
             ->orderByDesc('absensies_count')
             ->take(10)

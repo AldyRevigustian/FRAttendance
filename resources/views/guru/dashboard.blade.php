@@ -254,7 +254,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12l2 2 4-4M7 12a5 5 0 1010 0 5 5 0 00-10 0z" />
                                 </svg>
-                                Siswa Teraktif
+                                Siswa Terajin
                             </h3>
                             <div class="space-y-3" id="top-students-list">
                                 @foreach ($topStudents as $index => $student)
@@ -269,11 +269,11 @@
                                                 <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
                                                     {{ $student->nama }}</p>
                                                 <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                    {{ $student->absensi_count }} kali hadir</p>
+                                                    {{ $student->absensies_count }} kali hadir</p>
                                             </div>
                                         </div>
                                         <div class="text-sm font-semibold text-green-600 dark:text-green-400">
-                                            {{ number_format(($student->absensi_count / max($totalAbsensiBulanIni, 1)) * 100, 1) }}%
+                                            {{ number_format(($student->absensies_count / max($totalAbsensiBulanIni, 1)) * 100, 1) }}%
                                         </div>
                                     </div>
                                 @endforeach
