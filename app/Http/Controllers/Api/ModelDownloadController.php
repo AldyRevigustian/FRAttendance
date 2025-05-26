@@ -17,9 +17,6 @@ class ModelDownloadController extends Controller
         $this->modelPath = base_path('scripts/Model');
     }
 
-    /**
-     * Mendapatkan daftar file model
-     */
     public function getModelList()
     {
         try {
@@ -49,9 +46,7 @@ class ModelDownloadController extends Controller
         }
     }
 
-    /**
-     * Download file model individual
-     */
+
     public function downloadModel($filename)
     {
         try {
@@ -61,7 +56,6 @@ class ModelDownloadController extends Controller
                 return response()->json(['error' => 'File not found'], 404);
             }
 
-            // Validasi ekstensi file untuk keamanan
             $allowedExtensions = ['h5', 'pb', 'onnx', 'pkl', 'json', 'xml', 'bin', 'npy'];
             $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
@@ -75,9 +69,6 @@ class ModelDownloadController extends Controller
         }
     }
 
-    /**
-     * Download semua model dalam format ZIP
-     */
     public function downloadAllModels()
     {
         try {
@@ -88,7 +79,6 @@ class ModelDownloadController extends Controller
             $zipFileName = 'models_' . date('Y-m-d_H-i-s') . '.zip';
             $zipPath = storage_path('app/temp/' . $zipFileName);
 
-            // Buat direktori temp jika belum ada
             if (!File::exists(storage_path('app/temp'))) {
                 File::makeDirectory(storage_path('app/temp'), 0755, true);
             }

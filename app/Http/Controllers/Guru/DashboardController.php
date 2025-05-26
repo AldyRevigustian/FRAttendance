@@ -16,23 +16,19 @@ class DashboardController extends Controller
     {
         $kelas = Kelas::findOrFail($kelas_terpilih);
 
-        // Verify that the logged-in teacher is the homeroom teacher for this class
         $guru = Auth::guard('guru')->user();
         if ($kelas->guru_id !== $guru->id) {
             abort(403, 'Unauthorized access to this class dashboard.');
         }
 
-        // Date filters
         $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now()->subDays(7);
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
 
-        // Statistics for the selected class
         $totalSiswa = Siswa::where('kelas_id', $kelas_terpilih)->count();
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
 
-        // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
         $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [
                 Carbon::now()->startOfMonth()->startOfDay(),
@@ -44,7 +40,6 @@ class DashboardController extends Controller
             ->whereDate('tanggal', Carbon::today())
             ->count();
 
-        // Siswa with most attendance in the period
         $siswaAbsensiTerbanyak = Siswa::where('kelas_id', $kelas_terpilih)
             ->withCount(['absensies' => function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
@@ -52,14 +47,12 @@ class DashboardController extends Controller
             ->orderByDesc('absensies_count')
             ->first();
 
-        // Recent attendance for the class
         $recentAbsensi = Absensi::with('siswa')
             ->where('kelas_id', $kelas_terpilih)
             ->orderBy('updated_at', 'desc')
             ->take(10)
             ->get();
 
-        // Attendance trend for the last 14 days (or date range)
         $absensiTrend = [];
         $dateRange = min($endDate->diffInDays($startDate) + 1, 30);
 
@@ -78,7 +71,7 @@ class DashboardController extends Controller
             ];
         }
 
-        // Student attendance distribution (students ranked by their attendance frequency)
+
         $siswaAbsensiData = Siswa::where('kelas_id', $kelas_terpilih)
             ->withCount(['absensies' => function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
@@ -87,7 +80,7 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        // Weekly attendance distribution for current month
+
         $weeklyAttendance = [];
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
@@ -111,7 +104,7 @@ class DashboardController extends Controller
             ];
         }
 
-        // Average daily attendance calculation
+
         $avgDailyAttendance = $dateRange > 0 ? round($totalAbsensiPeriode / $dateRange, 1) : 0;
 
         if ($request->ajax()) {
@@ -169,7 +162,7 @@ class DashboardController extends Controller
     {
         $kelas = Kelas::findOrFail($kelas_terpilih);
 
-        // Verify that the logged-in teacher is the homeroom teacher for this class
+
         $guru = Auth::guard('guru')->user();
         if ($kelas->guru_id !== $guru->id) {
             abort(403, 'Unauthorized access to this class data.');
@@ -222,26 +215,26 @@ class DashboardController extends Controller
 
     public function refresh(Request $request, $kelas_terpilih)
     {
-        // Get selected class
+
         $kelas = Kelas::findOrFail($kelas_terpilih);
 
-        // Verify that the logged-in teacher is the homeroom teacher for this class
+
         $guru = Auth::guard('guru')->user();
         if ($kelas->guru_id !== $guru->id) {
             abort(403, 'Unauthorized access to this class dashboard.');
         }
 
-        // Date filters
+
         $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now()->subDays(7);
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
 
-        // Statistics for the selected class
+
         $totalSiswa = Siswa::where('kelas_id', $kelas_terpilih)->count();
         $totalAbsensiPeriode = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()])
             ->count();
 
-        // Total absensi untuk bulan ini (dari tanggal 1 sampai hari ini)
+
         $totalAbsensiBulanIni = Absensi::where('kelas_id', $kelas_terpilih)
             ->whereBetween('tanggal', [
                 Carbon::now()->startOfMonth()->startOfDay(),
@@ -253,7 +246,7 @@ class DashboardController extends Controller
             ->whereDate('tanggal', Carbon::today())
             ->count();
 
-        // Siswa with most attendance in the period
+
         $siswaAbsensiData = Siswa::where('kelas_id', $kelas_terpilih)
             ->withCount(['absensies' => function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('tanggal', [$startDate->startOfDay(), $endDate->endOfDay()]);
@@ -262,14 +255,14 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        // Recent attendance for the class
+
         $recentAbsensi = Absensi::with('siswa')
             ->where('kelas_id', $kelas_terpilih)
             ->orderBy('updated_at', 'desc')
             ->take(10)
             ->get();
 
-        // Attendance trend for the date range
+
         $absensiTrend = [];
         $dateRange = min($endDate->diffInDays($startDate) + 1, 30);
 
@@ -288,7 +281,7 @@ class DashboardController extends Controller
             ];
         }
 
-        // Weekly attendance distribution for current month
+
         $weeklyAttendance = [];
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
@@ -312,7 +305,7 @@ class DashboardController extends Controller
             ];
         }
 
-        // Average daily attendance calculation
+
         $avgDailyAttendance = $dateRange > 0 ? round($totalAbsensiPeriode / $dateRange, 1) : 0;
 
         return response()->json([

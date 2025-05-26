@@ -16,15 +16,12 @@ class AbsensiController extends Controller
     {
         $query = Absensi::with(['siswa', 'kelas']);
 
-        // Set default dates to today if no filters are provided
         $startDate = $request->filled('start_date') ? $request->start_date : now()->toDateString();
         $endDate = $request->filled('end_date') ? $request->end_date : now()->toDateString();
 
-        // Apply date filters
         $query->whereDate('tanggal', '>=', $startDate)
-              ->whereDate('tanggal', '<=', $endDate);
+            ->whereDate('tanggal', '<=', $endDate);
 
-        // Apply class filter if provided
         if ($request->filled('kelas_id')) {
             $query->where('kelas_id', $request->kelas_id);
         }

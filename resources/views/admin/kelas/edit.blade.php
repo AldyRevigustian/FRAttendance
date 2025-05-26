@@ -61,7 +61,6 @@
                 const kelasSelect = document.getElementById('guru_id');
                 if (kelasSelect) {
                     const choices = new Choices(kelasSelect, {
-                        // removeItemButton: true,
                         searchEnabled: true,
                     });
                 }

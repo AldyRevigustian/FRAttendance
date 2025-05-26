@@ -159,7 +159,8 @@
                                         class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                         {{ $totalAbsensiBulanIni }}
                                     </div>
-                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Absensi Bulan Ini</div>
+                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Absensi Bulan
+                                        Ini</div>
                                 </div>
                             </div>
                         </div>
@@ -364,11 +365,8 @@
 
                 document.addEventListener('DOMContentLoaded', function() {
                     try {
-                        // Initialize Charts
                         attendanceTrendChart = initializeAttendanceTrendChart();
                         weeklyDistributionChart = initializeWeeklyDistributionChart();
-
-                        // Setup refresh functionality
                         document.getElementById('refresh-data').addEventListener('click', refreshDashboard);
                     } catch (error) {
                         console.error('Error initializing dashboard:', error);
@@ -442,10 +440,10 @@
                                     label: 'Jumlah Kehadiran',
                                     data: weeklyData.map(item => item.count),
                                     backgroundColor: [
-                                        'rgba(59, 130, 246, 0.8)',   // Blue
-                                        'rgba(34, 197, 94, 0.8)',    // Green
-                                        'rgba(245, 158, 11, 0.8)',   // Orange
-                                        'rgba(147, 51, 234, 0.8)'    // Purple
+                                        'rgba(59, 130, 246, 0.8)',
+                                        'rgba(34, 197, 94, 0.8)',
+                                        'rgba(245, 158, 11, 0.8)',
+                                        'rgba(147, 51, 234, 0.8)'
                                     ],
                                     borderColor: [
                                         'rgb(59, 130, 246)',
@@ -459,7 +457,7 @@
                                 }]
                             },
                             options: {
-                                indexAxis: 'y', // This makes it horizontal
+                                indexAxis: 'y',
                                 responsive: true,
                                 maintainAspectRatio: false,
                                 plugins: {
@@ -519,27 +517,28 @@
                         })
                         .then(response => response.json())
                         .then(data => {
-                            // Update statistics
+
                             document.getElementById('total-siswa').textContent = data.totalSiswa;
                             document.getElementById('total-absensi').textContent = data.totalAbsensiBulanIni;
                             document.getElementById('rata-rata-kehadiran').textContent = data.rataRataKehadiran + '%';
                             document.getElementById('absensi-hari-ini').textContent = data.absensiHariIni;
 
-                            // Update attendance trend chart
+
                             if (attendanceTrendChart && data.attendanceTrend) {
                                 attendanceTrendChart.data.labels = data.attendanceTrend.map(item => item.label || item.date);
                                 attendanceTrendChart.data.datasets[0].data = data.attendanceTrend.map(item => item.count);
                                 attendanceTrendChart.update();
                             }
 
-                            // Update weekly distribution chart
+
                             if (weeklyDistributionChart && data.weeklyDistribution) {
-                                weeklyDistributionChart.data.labels = data.weeklyDistribution.map(item => item.label || item.week);
+                                weeklyDistributionChart.data.labels = data.weeklyDistribution.map(item => item.label || item
+                                    .week);
                                 weeklyDistributionChart.data.datasets[0].data = data.weeklyDistribution.map(item => item.count);
                                 weeklyDistributionChart.update();
                             }
 
-                            // Update top students list
+
                             const topStudentsList = document.getElementById('top-students-list');
                             topStudentsList.innerHTML = '';
                             data.topStudents.forEach((student, index) => {
@@ -563,7 +562,7 @@
                         `;
                             });
 
-                            // Update recent attendance list
+
                             const recentAttendanceList = document.getElementById('recent-attendance-list');
                             recentAttendanceList.innerHTML = '';
                             if (data.recentAbsensi.length > 0) {
@@ -591,7 +590,7 @@
                         `;
                             }
 
-                            // Add animation effects to stats
+
                             const statsElements = document.querySelectorAll('.text-3xl.font-bold');
                             statsElements.forEach(el => {
                                 el.classList.add('text-blue-600', 'dark:text-blue-400', 'scale-110', 'transform');

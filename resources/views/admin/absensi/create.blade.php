@@ -111,7 +111,6 @@
             const kelasSelect = document.getElementById('siswa_id');
             if (kelasSelect) {
                 const choices = new Choices(kelasSelect, {
-                    // removeItemButton: true,
                     searchEnabled: true,
                 });
             }

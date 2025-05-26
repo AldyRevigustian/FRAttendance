@@ -10,19 +10,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller
-{    public function index(Request $request, $kelas_terpilih)
+{
+    public function index(Request $request, $kelas_terpilih)
     {
         $kelas = Kelas::findOrFail($kelas_terpilih);
 
         $query = Absensi::with(['siswa', 'kelas'])->where('kelas_id', $kelas_terpilih);
-
-        // Set default dates to today if no filters are provided
         $startDate = $request->filled('start_date') ? $request->start_date : now()->toDateString();
         $endDate = $request->filled('end_date') ? $request->end_date : now()->toDateString();
 
-        // Apply date filters
         $query->whereDate('tanggal', '>=', $startDate)
-              ->whereDate('tanggal', '<=', $endDate);
+            ->whereDate('tanggal', '<=', $endDate);
 
         $absensis = $query->orderBy('tanggal', 'desc')->get();
 

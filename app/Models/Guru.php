@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Guru extends Authenticatable
 {
-    use HasApiTokens, Notifiable, HasFactory; // Use the trait
+    use HasApiTokens, Notifiable, HasFactory;
     protected $table = 'gurus';
     protected $fillable = [
         'kode',
@@ -30,4 +30,3 @@ class Guru extends Authenticatable
         return $this->hasMany(Kelas::class, 'guru_id');
     }
 }
-

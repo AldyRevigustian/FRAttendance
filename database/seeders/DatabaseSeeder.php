@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         Absensi::create([
             'siswa_id' => 2702303719,
             'kelas_id' => 1,
-            'tanggal' => now()->subDays(2)->toDateString(),   // format yyyy-mm-dd
+            'tanggal' => now()->subDays(2)->toDateString(),   
             'waktu_masuk' => now()->subDays(2)->setTime(7, 30),
             'waktu_keluar' => now()->subDays(2)->setTime(14, 30),
         ]);

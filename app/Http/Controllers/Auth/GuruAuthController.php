@@ -30,7 +30,6 @@ class GuruAuthController extends Controller
 
             $guru = Auth::guard('guru')->user();
 
-            // Validasi kelas dimiliki oleh guru
             $kelas = Kelas::where('id', $credentials['kelas_id'])
                 ->where('guru_id', $guru->id)
                 ->first();
