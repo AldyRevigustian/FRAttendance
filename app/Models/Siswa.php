@@ -11,7 +11,6 @@ class Siswa extends Model
 
     protected $fillable = [
         'id',
-        'nis',
         'nama',
         'kelas_id',
         'is_trained',
