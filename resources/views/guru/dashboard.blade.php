@@ -117,7 +117,7 @@
                                         class="text-3xl font-bold text-gray-700 dark:text-gray-200 transition-all duration-300">
                                         {{ number_format($rataRataKehadiran, 1) }}%
                                     </div>
-                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Rata-rata Kehadiran
+                                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Kehadiran Bulan Ini
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                     <div
                         class="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-300 sm:rounded-lg overflow-hidden">
-                        <div class="p-6 pb-20 border-t-4 border-indigo-500">
+                        <div class="p-6 pb-2 border-t-4 border-indigo-500">
                             <h3 class="text-lg font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center">
                                 <svg class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -161,7 +161,6 @@
                                 Trend Absensi Harian
                             </h3>
 
-                            <!-- Filter Periode untuk Chart -->
                             <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border">
                                 <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 flex items-center">
                                     <svg class="h-4 w-4 text-indigo-600 mr-2" fill="none" viewBox="0 0 24 24"
@@ -220,7 +219,7 @@
                                 </svg>
                                 Distribusi Mingguan
                             </h3>
-                            <div class="h-[400px]">
+                            <div class="h-[470px]">
                                 <canvas id="weekly-distribution-chart"></canvas>
                             </div>
                         </div>

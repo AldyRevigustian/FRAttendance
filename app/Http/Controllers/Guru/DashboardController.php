@@ -110,6 +110,10 @@ class DashboardController extends Controller
 
         $avgDailyAttendance = $dateRange > 0 ? round($totalAbsensiPeriode / $dateRange, 1) : 0;
 
+        // Calculate monthly average attendance percentage
+        $daysInMonthSoFar = Carbon::now()->startOfMonth()->diffInDays(Carbon::now()) + 1;
+        $avgMonthlyAttendance = $daysInMonthSoFar > 0 ? round(($totalAbsensiBulanIni / $totalSiswa / $daysInMonthSoFar) * 100, 1) : 0;
+
         if ($request->ajax()) {
             return response()->json([
                 'totalSiswa' => $totalSiswa,
@@ -153,7 +157,7 @@ class DashboardController extends Controller
         ), [
             'selectedKelas' => $kelas,
             'totalAbsensi' => $totalAbsensiBulanIni,
-            'rataRataKehadiran' => $avgDailyAttendance,
+            'rataRataKehadiran' => $avgMonthlyAttendance,
             'absensiHariIni' => $totalAbsensiHariIni,
             'topStudents' => $siswaAbsensiData,
             'attendanceTrend' => $absensiTrend,
@@ -314,11 +318,15 @@ class DashboardController extends Controller
 
         $avgDailyAttendance = $dateRange > 0 ? round($totalAbsensiPeriode / $dateRange, 1) : 0;
 
+        // Calculate monthly average attendance percentage for refresh
+        $daysInMonthSoFar = Carbon::now()->startOfMonth()->diffInDays(Carbon::now()) + 1;
+        $avgMonthlyAttendance = $daysInMonthSoFar > 0 ? round(($totalAbsensiBulanIni / $totalSiswa / $daysInMonthSoFar) * 100, 1) : 0;
+
         return response()->json([
             'totalSiswa' => $totalSiswa,
             'totalAbsensi' => $totalAbsensiPeriode,
             'totalAbsensiBulanIni' => $totalAbsensiBulanIni,
-            'rataRataKehadiran' => $avgDailyAttendance,
+            'rataRataKehadiran' => $avgMonthlyAttendance,
             'absensiHariIni' => $totalAbsensiHariIni,
             'topStudents' => $siswaAbsensiData->map(function ($siswa) {
                 return [
