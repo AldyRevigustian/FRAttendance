@@ -24,5 +24,10 @@ class Guru extends Authenticatable
     {
         return $this->password;
     }
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class, 'guru_id');
+    }
 }
 
